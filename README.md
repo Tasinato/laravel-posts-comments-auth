@@ -109,7 +109,7 @@ Acesse **http://127.0.0.1:8000**. Se a interface utilizar assets compilados pelo
 
 ## Roadmap de desenvolvimento
 
-**Progresso atual: 0 de 8 etapas (0%)**
+**Progresso atual: 1 de 8 etapas (12,5%)**
 
 - [X] **1. Configuração inicial**
   - Criar o projeto Laravel 12.
