@@ -111,7 +111,7 @@ Acesse **http://127.0.0.1:8000**. Se a interface utilizar assets compilados pelo
 
 **Progresso atual: 0 de 8 etapas (0%)**
 
-- [ ] **1. Configuração inicial**
+- [X] **1. Configuração inicial**
   - Criar o projeto Laravel 12.
   - Configurar o SQLite.
   - Preparar o ambiente de desenvolvimento.
