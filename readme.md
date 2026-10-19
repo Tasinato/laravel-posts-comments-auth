@@ -50,7 +50,3 @@ O projeto deve incluir testes de acesso público, autenticação e autorização
 ## Arquitetura
 
 O projeto segue a arquitetura MVC do Laravel, utilizando Models, Views, Controllers, migrations e Policies.
-
-
-
-Qual o nome do repositorio adequado?
