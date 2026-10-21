@@ -122,7 +122,7 @@ Acesse **http://127.0.0.1:8000**.
 
 ## Roadmap de desenvolvimento
 
-**Progresso atual: 2 de 8 etapas (25,0%)**
+**Progresso atual: 2 de 8 etapas (37,5%)**
 
 - [x] **1. Configuração inicial**
   - [x] Criar o projeto Laravel 12.
@@ -136,10 +136,12 @@ Acesse **http://127.0.0.1:8000**.
   - [x] Validar autenticação baseada em sessões.
   - [x] Testar acesso de visitantes ao dashboard.
 
-- [ ] **3. Banco de dados e relacionamentos**
-  - Criar migrations para posts e comentários.
-  - Configurar Models e relacionamentos Eloquent.
-  - Executar e validar as migrations.
+- [x] **3. Banco de dados e relacionamentos**
+  - [x] Criar migrations para posts e comentários.
+  - [x] Configurar Models e relacionamentos Eloquent.
+  - [x] Executar e validar as migrations.
+  - [x] Validar a criação de posts e comentários pelo Tinker.
+  - [x] Confirmar os relacionamentos entre User, Post e Comment.
 
 - [ ] **4. CRUD de posts**
   - Implementar listagem pública, visualização e criação.
