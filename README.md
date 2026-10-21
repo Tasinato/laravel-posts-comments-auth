@@ -122,17 +122,19 @@ Acesse **http://127.0.0.1:8000**.
 
 ## Roadmap de desenvolvimento
 
-**Progresso atual: 1 de 8 etapas (12,5%)**
+**Progresso atual: 2 de 8 etapas (25,0%)**
 
 - [x] **1. Configuração inicial**
-  - Criar o projeto Laravel 12.
-  - Configurar o SQLite.
-  - Preparar o ambiente de desenvolvimento.
-  - Validar a aplicação localmente e publicar o código inicial no GitHub.
+  - [x] Criar o projeto Laravel 12.
+  - [x] Configurar o SQLite.
+  - [x] Preparar o ambiente de desenvolvimento.
+  - [x] Validar a aplicação localmente e publicar o código inicial no GitHub.
 
-- [ ] **2. Autenticação de usuários**
-  - Implementar cadastro, login e logout.
-  - Proteger rotas que exigem autenticação.
+- [x] **2. Autenticação de usuários**
+  - [x] Implementar cadastro, login e logout.
+  - [x] Proteger rotas que exigem autenticação.
+  - [x] Validar autenticação baseada em sessões.
+  - [x] Testar acesso de visitantes ao dashboard.
 
 - [ ] **3. Banco de dados e relacionamentos**
   - Criar migrations para posts e comentários.
