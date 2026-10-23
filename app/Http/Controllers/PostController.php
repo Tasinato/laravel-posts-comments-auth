@@ -40,9 +40,11 @@ class PostController extends Controller
             ->with('success', 'Postagem criada com sucesso.');
     }
 
+    //Laravel carrega o autor da postagem "user", seus comentários "comments" e o autor de cada comentário.
+
     public function show(Post $post): View
     {
-        $post->load('user');
+        $post->load(['user', 'comments.user',]);
 
         return view('posts.show', compact('post'));
     }
@@ -103,3 +105,4 @@ class PostController extends Controller
 * associa o post ao usuário autenticado; 
 * e os métodos de alteração verificam a autoria.
 */
+

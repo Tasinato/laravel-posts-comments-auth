@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,21 @@ Route::middleware('auth')->group(function () {
 Route::get('/posts/{post}', [PostController::class, 'show'])
     ->whereNumber('post')
     ->name('posts.show');
+
+
+
+// -------------------------------------------------
+// CRUD de Comentários
+// -------------------------------------------------
+
+Route::middleware('auth')->group(function () {
+
+    // Criar comentário dentro de uma postagem
+    Route::post('/posts/{post}/comments', [
+        CommentController::class, 'store'
+    ])->name('posts.comments.store');
+
+    // Editar, atualizar e excluir comentários
+    Route::resource('comments', CommentController::class)
+        ->only(['edit', 'update', 'destroy']);
+});

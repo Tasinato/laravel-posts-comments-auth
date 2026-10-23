@@ -122,7 +122,7 @@ Acesse **http://127.0.0.1:8000**.
 
 ## Roadmap de desenvolvimento
 
-**Progresso atual: 4 de 8 etapas (50,0%)**
+**Progresso atual: 4 de 8 etapas (62,5%)**
 
 - [x] **1. Configuração inicial**
   - [x] Criar o projeto Laravel 12.
@@ -153,10 +153,15 @@ Acesse **http://127.0.0.1:8000**.
   - [x] Testar autorização de PUT e DELETE com PHPUnit.
 
 
-- [ ] **5. CRUD de comentários**
-  - Permitir comentar em postagens.
-  - Exibir os comentários em cada post.
-  - Implementar edição e exclusão e suas interfaces.
+- [x] **5. CRUD de comentários**
+  - [x] Permitir comentar em postagens por usuários autenticados.
+  - [x] Exibir comentários nas postagens.
+  - [x] Implementar edição e exclusão pelo autor.
+  - [x] Criar interface Blade para edição.
+  - [x] Validar bloqueio de edição por terceiros (HTTP 403).
+  - [x] Validar autorização de PUT e DELETE com PHPUnit.
+  - [x] Executar 4 testes automatizados com 10 asserções.
+
 
 - [ ] **6. Autorização com Laravel Policies**
   - Implementar `PostPolicy` e `CommentPolicy`.
@@ -176,7 +181,7 @@ Acesse **http://127.0.0.1:8000**.
 
 ### Estado atual
 
-**Em desenvolvimento** · Próxima etapa: **CRUD de comentários.**.
+**Em desenvolvimento** · Próxima etapa: ** Implementar Laravel Policies para centralizar as regras de autorização de posts e comentários.**.
 
 ## Decisões técnicas
 
