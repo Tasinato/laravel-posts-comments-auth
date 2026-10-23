@@ -9,12 +9,13 @@
         <p style="white-space: pre-wrap;">{{ $post->content }}</p>
     </article>
 
-    @auth
-        @if (auth()->id() === $post->user_id)
+    @can('update', $post)
             <a href="{{ route('posts.edit', $post) }}">
                 Editar
             </a>
+    @endcan
 
+    @can('delete', $post)
             <form action="{{ route('posts.destroy', $post) }}"
                   method="POST"
                   onsubmit="return confirm('Excluir esta postagem?')">
@@ -23,8 +24,8 @@
 
                 <button type="submit">Excluir</button>
             </form>
-        @endif
-    @endauth
+    @endcan
+    
 
     <p>
         <a href="{{ route('posts.index') }}">
@@ -45,24 +46,23 @@
 
         <p>{{ $comment->content }}</p>
 
-        @auth
-            @if (auth()->id() === $comment->user_id)
+        @can('update', $comment)
                 <a href="{{ route('comments.edit', $comment) }}">
                     Editar comentário
                 </a>
+        @endcan
 
+        @can('delete', $comment)
                 <form
                     action="{{ route('comments.destroy', $comment) }}"
                     method="POST"
-                    onsubmit="return confirm('Excluir este comentário?')"
-                >
+                    onsubmit="return confirm('Excluir este comentário?')">
                     @csrf
                     @method('DELETE')
 
                     <button type="submit">Excluir comentário</button>
                 </form>
-            @endif
-        @endauth
+        @endcan
     </div>
 
     <hr>

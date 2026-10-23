@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
+
 
 class PostController extends Controller
 {
@@ -51,14 +52,14 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
-        abort_unless(Auth::id() === $post->user_id, 403);
+        Gate::authorize('update', $post);
 
         return view('posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post): RedirectResponse
     {
-        abort_unless(Auth::id() === $post->user_id, 403);
+        Gate::authorize('update', $post);
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -74,16 +75,15 @@ class PostController extends Controller
 
 
     /**
- * Exclui uma postagem somente se o usuário
- * autenticado for seu proprietário.
- *
- * Na etapa 6, a autorização será
- * centralizada na PostPolicy.
+ * Gate::authorize('delete', $post);
+ * consulta a Policy correspondente e lança uma exceção de autorização 
+ * caso a ação seja negada, 
+ * que o Laravel converte em HTTP 403.
  */
 
     public function destroy(Post $post): RedirectResponse
     {
-        abort_unless(Auth::id() === $post->user_id, 403);
+        Gate::authorize('delete', $post);
 
         $post->delete();
 

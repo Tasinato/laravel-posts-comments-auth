@@ -6,7 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class CommentController extends Controller
@@ -30,7 +30,8 @@ class CommentController extends Controller
 
     public function edit(Comment $comment): View
     {
-        abort_unless(Auth::id() === $comment->user_id, 403);
+        Gate::authorize('update', $comment);
+
 
         return view('comments.edit', compact('comment'));
     }
@@ -39,7 +40,7 @@ class CommentController extends Controller
         Request $request,
         Comment $comment
     ): RedirectResponse {
-        abort_unless(Auth::id() === $comment->user_id, 403);
+        Gate::authorize('update', $comment);
 
         $validated = $request->validate([
             'content' => ['required', 'string'],
@@ -54,7 +55,7 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment): RedirectResponse
     {
-        abort_unless(Auth::id() === $comment->user_id, 403);
+        Gate::authorize('delete', $comment);
 
         $postId = $comment->post_id;
 
