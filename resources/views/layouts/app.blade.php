@@ -12,7 +12,8 @@
         <h1>Laravel Posts & Comments</h1>
 
         <nav>
-            <a href="{{ route('home') }}">Início</a>
+            <a href="{{ route('home') }}">Início</a> 
+            | <a href="{{ route('posts.index') }}">Postagens</a>
 
             @guest
                 | <a href="{{ route('login') }}">Entrar</a>
@@ -28,10 +29,21 @@
                     <button type="submit">Sair</button>
                 </form>
             @endauth
+
+            
+
+
         </nav>
     </header>
 
     <hr>
+
+    @if (session('success'))
+        <p style="color: green;">
+            {{ session('success') }}
+        </p>
+    @endif
+
 
     <main>
         @yield('content')

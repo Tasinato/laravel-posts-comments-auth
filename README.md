@@ -122,7 +122,7 @@ Acesse **http://127.0.0.1:8000**.
 
 ## Roadmap de desenvolvimento
 
-**Progresso atual: 2 de 8 etapas (37,5%)**
+**Progresso atual: 4 de 8 etapas (50,0%)**
 
 - [x] **1. Configuração inicial**
   - [x] Criar o projeto Laravel 12.
@@ -143,10 +143,15 @@ Acesse **http://127.0.0.1:8000**.
   - [x] Validar a criação de posts e comentários pelo Tinker.
   - [x] Confirmar os relacionamentos entre User, Post e Comment.
 
-- [ ] **4. CRUD de posts**
-  - Implementar listagem pública, visualização e criação.
-  - Implementar edição e exclusão.
-  - Criar as interfaces Blade.
+- [x] **4. CRUD de posts**
+  - [x] Implementar listagem pública de postagens.
+  - [x] Implementar criação por usuários autenticados.
+  - [x] Implementar visualização individual.
+  - [x] Implementar edição e exclusão pelo autor.
+  - [x] Criar as interfaces Blade.
+  - [x] Validar acesso público e proteção das rotas.
+  - [x] Testar autorização de PUT e DELETE com PHPUnit.
+
 
 - [ ] **5. CRUD de comentários**
   - Permitir comentar em postagens.
@@ -171,7 +176,7 @@ Acesse **http://127.0.0.1:8000**.
 
 ### Estado atual
 
-**Em desenvolvimento** · Próxima etapa: **autenticação de usuários**.
+**Em desenvolvimento** · Próxima etapa: **CRUD de comentários.**.
 
 ## Decisões técnicas
 
