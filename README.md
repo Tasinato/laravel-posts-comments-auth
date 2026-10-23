@@ -310,7 +310,7 @@ O ambiente de testes pode utilizar SQLite em memória, conforme a configuração
 
 ## Roadmap de desenvolvimento
 
-**Progresso confirmado: 6 de 8 etapas concluídas (75%).**
+**Progresso confirmado: 7 de 8 etapas concluídas (87,5%).**
 
 A etapa 6 encontra-se em validação final.
 
@@ -373,11 +373,15 @@ A etapa 6 encontra-se em validação final.
 
 ### 7. Testes automatizados
 
-- [ ] Ampliar os testes de leitura pública.
-- [ ] Testar criação de conteúdo por usuários autenticados.
-- [ ] Testar bloqueio de visitantes em rotas protegidas.
-- [ ] Complementar os cenários de autorização.
-- [ ] Validar a suíte completa sem falhas.
+- [x] Validar leitura pública de postagens.
+- [x] Validar criação de postagens por usuários autenticados.
+- [x] Validar criação de comentários por usuários autenticados.
+- [x] Testar bloqueio de criação por visitantes.
+- [x] Testar bloqueio de edição e exclusão por visitantes.
+- [x] Testar permissões dos autores e bloqueio de terceiros.
+- [x] Validar campos obrigatórios nos formulários de criação.
+- [x] Executar a suíte completa sem falhas.
+
 
 ### 8. Documentação e publicação
 
@@ -388,9 +392,9 @@ A etapa 6 encontra-se em validação final.
 
 ### Estado atual
 
-**Em desenvolvimento — Etapa: 7.**
+**Em desenvolvimento — Etapa: 8.**
 
-Próxima atividade: Testes automatizados, com ampliação da cobertura para leitura pública, autenticação, criação de conteúdo, validação de formulários e proteção de rotas.
+Próxima atividade: Revisar e finalizar o README.md, conferir a estrutura e a organização do código, validar a suíte completa de testes automatizados, revisar os arquivos versionados e documentar as decisões técnicas. Após a validação, realizar o commit e publicar a versão final do projeto no GitHub.
 
 ## Decisões técnicas
 
