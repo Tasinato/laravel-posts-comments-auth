@@ -187,9 +187,11 @@ public function test_the_application_returns_a_successful_response(): void
 
 Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Blade continuam sendo exercitadas. A compilação e a execução dos assets frontend devem ser verificadas separadamente.
 
+
 ## Roadmap de desenvolvimento
 
-**7 de 8 etapas concluídas (87,5%).** Funcionalidades e testes concluídos; resta publicar esta revisão final do README.
+**8 etapas concluídas. Etapa 9 em desenvolvimento: Usabilidade, Interface e Acessibilidade.**
+
 
 ### 1. Configuração inicial
 - [x] Criar o projeto Laravel 12, configurar SQLite e ambiente local.
@@ -226,7 +228,67 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 - [x] Confirmar a suíte completa atualizada sem falhas: 21 testes, 58 asserções.
 - [x] Revisar os arquivos versionados e o `.env.example` e realizar busca básica de padrões de segredos.
 - [x] Publicar código e testes no GitHub (commit `be968c1`) e confirmar a árvore limpa.
-- [ ] Publicar esta última revisão do README, incluindo autoria e declaração de uso de IA.
+- [X] Publicar esta última revisão do README, incluindo autoria e declaração de uso de IA.
+
+### 9. Usabilidade, Interface e Acessibilidade
+
+**Objetivo:** aprimorar a experiência do usuário, garantindo uma interface intuitiva, responsiva e acessível, sem alterar as regras de negócio e autorização existentes.
+
+#### 9.1. Layout e navegação
+- [ ] Revisar o layout principal (`layouts/app.blade.php`).
+- [ ] Padronizar cores, tipografia, espaçamentos, botões e menus.
+- [ ] Organizar o cabeçalho e a navegação entre páginas.
+- [ ] Implementar layout responsivo para desktop, tablet e celular.
+- [ ] Criar link para pular diretamente ao conteúdo principal.
+
+#### 9.2. Postagens e comentários
+- [ ] Melhorar a listagem de postagens (`posts/index.blade.php`).
+- [ ] Melhorar a página de leitura e comentários (`posts/show.blade.php`).
+- [ ] Exibir claramente título, conteúdo, autor e data de publicação.
+- [ ] Padronizar os formulários de criação e edição.
+- [ ] Adicionar mensagens claras de sucesso, erro e validação.
+- [ ] Implementar confirmação acessível antes da exclusão.
+- [ ] Exibir mensagens apropriadas quando não existirem postagens ou comentários.
+
+#### 9.3. Acessibilidade visual
+- [ ] Garantir contraste adequado entre texto e fundo.
+- [ ] Utilizar fontes legíveis e tamanhos apropriados.
+- [ ] Permitir ampliação de texto sem perda de conteúdo ou funcionalidades.
+- [ ] Garantir reorganização da interface com zoom de até 400%.
+- [ ] Não utilizar exclusivamente cores para transmitir informações.
+
+#### 9.4. Acessibilidade para leitores de tela
+- [ ] Utilizar HTML semântico (`header`, `nav`, `main`, `article`, `footer`).
+- [ ] Configurar corretamente o idioma da página (`lang="pt-BR"`).
+- [ ] Manter hierarquia lógica de títulos (`h1`, `h2`, `h3`).
+- [ ] Associar rótulos descritivos a todos os campos dos formulários.
+- [ ] Garantir nomes acessíveis para botões e links.
+- [ ] Disponibilizar mensagens de erro e sucesso para leitores de tela.
+- [ ] Testar navegação com NVDA ou tecnologia assistiva equivalente.
+
+#### 9.5. Acessibilidade auditiva
+- [ ] Garantir que as funcionalidades não dependam exclusivamente de sinais sonoros.
+- [ ] Disponibilizar instruções, notificações e confirmações em texto.
+- [ ] Prever legendas e transcrições caso sejam incorporados conteúdos multimídia.
+
+#### 9.6. Navegação por teclado e acessibilidade motora
+- [ ] Garantir utilização das funcionalidades sem mouse.
+- [ ] Implementar ordem lógica de navegação com a tecla Tab.
+- [ ] Destacar visualmente o elemento em foco.
+- [ ] Garantir acionamento de botões por teclado.
+- [ ] Evitar componentes que dependam exclusivamente de gestos ou movimentos precisos.
+- [ ] Verificar dimensões e espaçamento dos alvos interativos.
+
+#### 9.7. Testes e validação
+- [ ] Verificar responsividade em diferentes resoluções.
+- [ ] Realizar testes manuais de navegação por teclado.
+- [ ] Avaliar acessibilidade com Lighthouse e axe DevTools.
+- [ ] Verificar compatibilidade com leitores de tela.
+- [ ] Revisar os critérios aplicáveis da WCAG 2.2 A e AA.
+- [ ] Executar novamente os 21 testes automatizados do Laravel.
+- [ ] Confirmar que as regras de autenticação e autorização continuam funcionando.
+- [ ] Atualizar o README com as melhorias implementadas e os resultados das verificações.
+
 
 ## Decisões técnicas
 
