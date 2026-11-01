@@ -65,3 +65,8 @@
     /* Borda vermelha para delimitar a mensagem */
     border: 1px solid #fca5a5;
 }
+
+/* Exibe a mensagem <output> como bloco, ocupando a largura disponível. */
+output.alert {
+    display: block;
+}

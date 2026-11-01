@@ -5,46 +5,40 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
+// Personaliza o middleware padrão do Inertia.
 class HandleInertiaRequests extends Middleware
 {
     /**
-     * The root template that's loaded on the first page visit.
-     *
-     * @see https://inertiajs.com/server-side-setup#root-template
+     * Define resources/views/app.blade.php como o template
+     * HTML inicial das páginas React renderizadas pelo Inertia.
      *
      * @var string
      */
     protected $rootView = 'app';
 
     /**
-     * Determines the current asset version.
-     *
-     * @see https://inertiajs.com/asset-versioning
-     */
-    public function version(Request $request): ?string
-    {
-        return parent::version($request);
-    }
-
-    /**
-     * Define the props that are shared by default.
-     *
-     * @see https://inertiajs.com/shared-data
+     * Compartilha dados com as páginas Inertia.
+     * No React, esses dados podem ser acessados com usePage().props.
      *
      * @return array<string, mixed>
      */
     public function share(Request $request): array
     {
         return [
+            // Preserva os dados compartilhados pelo middleware base.
             ...parent::share($request),
-            
+
+            // Agrupa as informações de autenticação.
             'auth' => [
-            'user' => fn () => $request->user()
-                ? [
-                    'id' => $request->user()->id,
-                    'name' => $request->user()->name,
-                ]
-                : null,
+                // A função permite avaliar o usuário quando o Inertia
+                // resolver esta prop. Retorna null para visitantes.
+                'user' => fn () => $request->user()
+                    ? [
+                        // Expõe apenas os dados necessários ao frontend.
+                        'id' => $request->user()->id,
+                        'name' => $request->user()->name,
+                    ]
+                    : null,
             ],
         ];
     }

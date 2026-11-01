@@ -81,7 +81,10 @@
    - Reduz a duração de animações
    - Reduz a duração de transições
 ======================================== */
-
+/*
+ * Uso intencional de !important para priorizar a preferência
+ * de movimento reduzido sobre os estilos dos componentes.
+ */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

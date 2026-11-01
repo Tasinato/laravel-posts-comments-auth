@@ -54,7 +54,7 @@
 
     <main id="conteudo-principal" class="site-container main-content">
         @if (session('success'))
-            <div class="alert alert-success" role="status">
+            <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
