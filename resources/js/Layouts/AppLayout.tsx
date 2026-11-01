@@ -1,4 +1,3 @@
-
 import type { ReactNode } from 'react';
 import { router, usePage } from '@inertiajs/react';
 
@@ -18,13 +17,14 @@ type AppLayoutProps = {
     readonly children: ReactNode;
 };
 
+function handleLogout() {
+    router.post('/logout');
+}
+
+
 export default function AppLayout({ children }: AppLayoutProps) {
     const { auth } = usePage<SharedProps>().props;
     const user = auth?.user ?? null;
-
-    function handleLogout() {
-        router.post('/logout');
-    }
 
     return (
         <>
