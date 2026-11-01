@@ -52,7 +52,7 @@
         </div>
     </header>
 
-    <main id="conteudo-principal" class="site-container main-content">
+    <main id="conteudo-principal" class="site-container main-content" tabindex="-1">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
