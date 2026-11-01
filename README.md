@@ -5,7 +5,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Documenta%C3%A7%C3%A3o%20final-64748B?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Frontend%20em%20evolu%C3%A7%C3%A3o-64748B?style=flat-square)
 
 [Visão geral](#visão-geral) · [Funcionalidades](#funcionalidades) · [Regras de acesso](#regras-de-acesso) · [Instalação](#instalação) · [Testes](#testes-automatizados) · [Roadmap](#roadmap-de-desenvolvimento)
 
@@ -13,7 +13,9 @@
 
 Aplicação web em **Laravel 12** para gerenciamento de postagens e comentários. Qualquer pessoa pode ler conteúdo, usuários autenticados podem publicar, e **somente o autor** pode editar ou excluir cada postagem ou comentário.
 
-A solução prioriza simplicidade, legibilidade, segurança e testes automatizados, sem adicionar dependências desnecessárias.
+A interface principal do CRUD utiliza **Blade**, com estilos CSS modulares e melhorias de responsividade e acessibilidade. A integração com **React + TypeScript + Inertia.js** está iniciada, com layout compartilhado e uma listagem experimental de postagens. A migração do CRUD para React ainda não está concluída.
+
+Esta versão está na branch [feature/react-inertia-frontend](https://github.com/Tasinato/laravel-posts-comments-auth/tree/feature/react-inertia-frontend). O link do GitHub permite consultar o código; não representa uma aplicação hospedada.
 
 ## Funcionalidades
 
@@ -24,6 +26,11 @@ A solução prioriza simplicidade, legibilidade, segurança e testes automatizad
 - [x] Validação de formulários no backend.
 - [x] Autorização centralizada com `PostPolicy` e `CommentPolicy`.
 - [x] Testes automatizados de acesso público, criação, validação e autorização.
+- [x] CSS modular para layout, navegação, botões, alertas, cards e formulários.
+- [x] Campos com rótulos e associações ARIA condicionais para mensagens de validação.
+- [x] Link para pular ao conteúdo e indicação de foco por teclado.
+- [x] Integração inicial React + TypeScript + Inertia.js.
+- [ ] Migrar as páginas de autenticação e o CRUD completo para React/Inertia.
 
 ## Tecnologias
 
@@ -32,7 +39,9 @@ A solução prioriza simplicidade, legibilidade, segurança e testes automatizad
 | Laravel 12 e PHP 8.2+ | Backend e arquitetura MVC |
 | SQLite | Persistência relacional sem servidor dedicado |
 | Eloquent ORM | Models e relacionamentos |
-| Blade | Interface renderizada pelo servidor |
+| Blade | Interface atual de autenticação e CRUD |
+| React, TypeScript e Inertia.js | Integração e páginas experimentais de frontend |
+| Tailwind CSS 4 e CSS modular | Estilos e responsividade |
 | Laravel Policies e Gate | Autorização por autoria |
 | PHPUnit | Testes automatizados |
 | Vite | Assets CSS e JavaScript |
@@ -63,7 +72,9 @@ O projeto usa o padrão **MVC** do Laravel:
 
 - **Models:** `User`, `Post` e `Comment` com relacionamentos Eloquent.
 - **Controllers:** processamento das requisições, validação e operações CRUD.
-- **Views:** páginas Blade.
+- **Views:** páginas Blade para autenticação, painel e CRUD.
+- **Frontend React:** entrada em `resources/js/app.tsx`, layout em `resources/js/Layouts/AppLayout.tsx` e páginas em `resources/js/Pages`.
+- **CSS:** entrada em `resources/css/app.css`, com módulos em `base`, `components` e `pages`.
 - **Policies:** verificação centralizada da autoria para editar e excluir.
 - **Middleware:** restrição das rotas de escrita a usuários autenticados.
 - **Migrations:** versionamento do esquema SQLite.
@@ -89,15 +100,18 @@ Os controllers verificam as permissões, por exemplo, com `Gate::authorize('upda
 
 ### Pré-requisitos
 
-PHP 8.2+, Composer, Node.js/npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO.
+PHP 8.2+, Composer, Node.js compatível com o Vite instalado (veja a exigência abaixo), npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO. As dependências são registradas em `composer.json`, `package.json` e seus arquivos de lock.
+
+A versão do Vite instalada durante esta revisão é `8.3.5`, que declara Node.js `^20.19.0 || >=22.12.0`. Use uma versão que satisfaça esse requisito.
 
 ### Clonar e instalar
 
 ```bash
 git clone https://github.com/Tasinato/laravel-posts-comments-auth.git
 cd laravel-posts-comments-auth
+git switch feature/react-inertia-frontend
 composer install
-npm install
+npm ci
 ```
 
 Configure o ambiente:
@@ -118,7 +132,9 @@ DB_CONNECTION=sqlite
 Se o arquivo do banco ainda não existir, crie `database/database.sqlite`. No PowerShell:
 
 ```powershell
-New-Item -Path database/database.sqlite -ItemType File -Force
+if (-not (Test-Path database/database.sqlite)) {
+    New-Item -Path database/database.sqlite -ItemType File
+}
 ```
 
 Depois execute:
@@ -147,6 +163,23 @@ Acesse **http://127.0.0.1:8000**.
 
 Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run build` (ou `npm.cmd run build` no PowerShell).
 
+## Páginas disponíveis
+
+| Endereço local | Finalidade | Acesso |
+| --- | --- | --- |
+| `/` | Página inicial | Público |
+| `/posts` | Listagem Blade | Público |
+| `/posts/{id}` | Postagem e comentários | Leitura pública |
+| `/register` e `/login` | Cadastro e entrada | Visitante |
+| `/dashboard` | Painel do usuário | Autenticado |
+| `/posts/create` | Nova postagem | Autenticado |
+| `/posts/{id}/edit` | Editar postagem | Autor |
+| `/comments/{id}/edit` | Editar comentário | Autor |
+| `/react-test` | Teste da integração React/Inertia | Público, experimental |
+| `/react-posts-test` | Listagem React/Inertia | Público, experimental |
+
+Substitua `{id}` por um registro existente no seu banco. Cadastre sua própria conta para criar conteúdo; a instalação não pressupõe credenciais de demonstração.
+
 ## Testes automatizados
 
 Execute todos os testes com:
@@ -168,7 +201,7 @@ php artisan test --filter=GuestAuthorizationTest
 
 Os testes cobrem leitura pública, criação autenticada, validação de campos obrigatórios, bloqueio de visitantes e edição/exclusão restritas ao autor. Os testes com dados usam `RefreshDatabase` e o ambiente de teste configurado no `phpunit.xml`.
 
-**Resultado da suíte completa confirmado em 23/10/2026:** **21 testes aprovados, 58 asserções e nenhuma falha** (`php artisan test`).
+**Resultado da suíte completa informado pela execução local em 01/11/2026:** **21 testes aprovados, 58 asserções e nenhuma falha** (`php artisan test`).
 
 ### Vite nos testes
 
@@ -190,8 +223,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 
 ## Roadmap de desenvolvimento
 
-**8 etapas concluídas. Etapa 9 em desenvolvimento: Usabilidade, Interface e Acessibilidade.**
-
+As etapas 1 a 8 registram o histórico do projeto. A etapa 9 reúne as melhorias atuais da interface e distingue implementação de validação. A migração completa para React/Inertia permanece em desenvolvimento.
 
 ### 1. Configuração inicial
 - [x] Criar o projeto Laravel 12, configurar SQLite e ambiente local.
@@ -227,68 +259,42 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 - [x] Revisar o README e registrar decisões técnicas.
 - [x] Confirmar a suíte completa atualizada sem falhas: 21 testes, 58 asserções.
 - [x] Revisar os arquivos versionados e o `.env.example` e realizar busca básica de padrões de segredos.
-- [x] Publicar código e testes no GitHub (commit `be968c1`) e confirmar a árvore limpa.
-- [X] Publicar esta última revisão do README, incluindo autoria e declaração de uso de IA.
+- [x] Publicar a versão anterior de código e testes no GitHub (commit `be968c1`), conforme o histórico documentado.
+- [x] Publicar a integração inicial React/Inertia e os estilos modulares na branch `feature/react-inertia-frontend` (commit `ffb7377`).
+- [x] Publicar a revisão anterior do README, incluindo autoria e declaração de uso de IA.
 
 ### 9. Usabilidade, Interface e Acessibilidade
 
-**Objetivo:** aprimorar a experiência do usuário, garantindo uma interface intuitiva, responsiva e acessível, sem alterar as regras de negócio e autorização existentes.
+#### 9.1. Implementado
 
-#### 9.1. Layout e navegação
-- [ ] Revisar o layout principal (`layouts/app.blade.php`).
-- [ ] Padronizar cores, tipografia, espaçamentos, botões e menus.
-- [ ] Organizar o cabeçalho e a navegação entre páginas.
-- [ ] Implementar layout responsivo para desktop, tablet e celular.
-- [ ] Criar link para pular diretamente ao conteúdo principal.
+- CRUD Blade com autenticação por sessão e autorização por autoria.
+- Cabeçalho com navegação para visitantes e usuários autenticados.
+- CSS modular para páginas, formulários, cards, botões e mensagens.
+- Títulos principais em `h1` nos formulários e no painel.
+- Rótulos de campos e mensagens de erro associadas por `aria-describedby` e `aria-invalid` quando há erro.
+- Link para pular ao conteúdo, foco visível e tratamento de movimento reduzido.
+- Botões de edição e exclusão condicionados às Policies.
+- Integração inicial React/Inertia e listagem experimental.
 
-#### 9.2. Postagens e comentários
-- [ ] Melhorar a listagem de postagens (`posts/index.blade.php`).
-- [ ] Melhorar a página de leitura e comentários (`posts/show.blade.php`).
-- [ ] Exibir claramente título, conteúdo, autor e data de publicação.
-- [ ] Padronizar os formulários de criação e edição.
-- [ ] Adicionar mensagens claras de sucesso, erro e validação.
-- [ ] Implementar confirmação acessível antes da exclusão.
-- [ ] Exibir mensagens apropriadas quando não existirem postagens ou comentários.
+#### 9.2. Verificações realizadas em 01/11/2026
 
-#### 9.3. Acessibilidade visual
-- [ ] Garantir contraste adequado entre texto e fundo.
-- [ ] Utilizar fontes legíveis e tamanhos apropriados.
-- [ ] Permitir ampliação de texto sem perda de conteúdo ou funcionalidades.
-- [ ] Garantir reorganização da interface com zoom de até 400%.
-- [ ] Não utilizar exclusivamente cores para transmitir informações.
+- Inspeção visual de início, listagem, detalhes, cadastro e formulários em larguras selecionadas de desktop e celular; a página de detalhes também foi conferida em tablet.
+- Conferência do painel no desktop.
+- Conferência da visibilidade de ações com autor e outro usuário: cada usuário vê ações somente para seu próprio conteúdo.
+- Atualização de comentário confirmada por mensagem de sucesso.
+- Validação nativa de campo obrigatório confirmada no formulário de nova postagem.
+- Compilação dos assets concluída durante a revisão com `npm run build`.
+- Suíte Laravel: **21 testes aprovados e 58 asserções**.
 
-#### 9.4. Acessibilidade para leitores de tela
-- [ ] Utilizar HTML semântico (`header`, `nav`, `main`, `article`, `footer`).
-- [ ] Configurar corretamente o idioma da página (`lang="pt-BR"`).
-- [ ] Manter hierarquia lógica de títulos (`h1`, `h2`, `h3`).
-- [ ] Associar rótulos descritivos a todos os campos dos formulários.
-- [ ] Garantir nomes acessíveis para botões e links.
-- [ ] Disponibilizar mensagens de erro e sucesso para leitores de tela.
-- [ ] Testar navegação com NVDA ou tecnologia assistiva equivalente.
+#### 9.3. Verificações e melhorias pendentes
 
-#### 9.5. Acessibilidade auditiva
-- [ ] Garantir que as funcionalidades não dependam exclusivamente de sinais sonoros.
-- [ ] Disponibilizar instruções, notificações e confirmações em texto.
-- [ ] Prever legendas e transcrições caso sejam incorporados conteúdos multimídia.
+- Conferir visualmente os erros retornados pelo Laravel e suas associações ARIA em execução; o aviso nativo de campo obrigatório não substitui essa verificação.
+- Ampliar a navegação manual por teclado, os testes de zoom e a cobertura de diferentes tamanhos de tela.
+- Avaliar com Lighthouse/axe e leitor de tela, como NVDA.
+- Revisar os critérios aplicáveis da WCAG 2.2 A e AA. Ainda não há declaração de conformidade completa.
+- Completar a migração do CRUD e da autenticação para React/Inertia, preservando as Policies.
 
-#### 9.6. Navegação por teclado e acessibilidade motora
-- [ ] Garantir utilização das funcionalidades sem mouse.
-- [ ] Implementar ordem lógica de navegação com a tecla Tab.
-- [ ] Destacar visualmente o elemento em foco.
-- [ ] Garantir acionamento de botões por teclado.
-- [ ] Evitar componentes que dependam exclusivamente de gestos ou movimentos precisos.
-- [ ] Verificar dimensões e espaçamento dos alvos interativos.
-
-#### 9.7. Testes e validação
-- [ ] Verificar responsividade em diferentes resoluções.
-- [ ] Realizar testes manuais de navegação por teclado.
-- [ ] Avaliar acessibilidade com Lighthouse e axe DevTools.
-- [ ] Verificar compatibilidade com leitores de tela.
-- [ ] Revisar os critérios aplicáveis da WCAG 2.2 A e AA.
-- [ ] Executar novamente os 21 testes automatizados do Laravel.
-- [ ] Confirmar que as regras de autenticação e autorização continuam funcionando.
-- [ ] Atualizar o README com as melhorias implementadas e os resultados das verificações.
-
+As verificações visuais são amostrais e não substituem uma auditoria de acessibilidade ou testes completos de navegador.
 
 ## Decisões técnicas
 
@@ -296,7 +302,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 
 **Por que SQLite?** É relacional, leve e suficiente para um desafio pequeno, sem exigir infraestrutura de banco dedicada.
 
-**Por que Blade?** Permite implementar as páginas no Laravel sem a complexidade de uma SPA (Single Page Application).
+**Por que Blade e React/Inertia coexistem?** Blade mantém o CRUD atual funcionando enquanto a integração React/Inertia evolui em páginas experimentais. A migração deve preservar a autenticação, as rotas de negócio e as Policies.
 
 **Por que Policies em vez de um RBAC com tabelas de papéis?** O enunciado prioriza simplicidade e exige somente restrição por autoria. Policies expressam essa regra diretamente e são testáveis. A solução não deve ser apresentada como RBAC formal.
 
@@ -320,4 +326,4 @@ A ferramenta foi utilizada como suporte ao processo de desenvolvimento. A execu�
 
 ---
 
-**Projeto de demonstração técnica desenvolvido com Laravel 12, PHP, SQLite e Blade.**
+**Projeto de demonstração técnica com Laravel 12, PHP, SQLite, Blade e integração inicial React + Inertia.js.**
