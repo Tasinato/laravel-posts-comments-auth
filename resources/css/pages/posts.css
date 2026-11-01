@@ -1,0 +1,138 @@
+/* ========================================
+   PÁGINA: LISTAGEM DE POSTAGENS
+   Arquivo: pages/posts.css
+
+   Responsável pela organização visual
+   da página de listagem de postagens.
+
+   Utilizado em:
+   - React: Pages/Posts/Index.tsx
+   - Blade: views/posts/index.blade.php
+
+   Componentes reutilizados:
+   - components/post-card.css
+   - components/buttons.css
+======================================== */
+
+
+/* ========================================
+   1. Cabeçalho da página
+   Contém título, descrição e possíveis ações
+======================================== */
+
+.posts-header {
+    /* Organiza os elementos lado a lado */
+    display: flex;
+
+    /* Distribui os elementos entre as extremidades */
+    justify-content: space-between;
+
+    /* Centraliza os elementos verticalmente */
+    align-items: center;
+
+    /* Permite quebrar a linha em telas menores */
+    flex-wrap: wrap;
+
+    /* Espaçamento entre os elementos */
+    gap: 20px;
+
+    /* Separa o cabeçalho da listagem */
+    margin-bottom: 28px;
+}
+
+
+/* Título principal da página */
+
+.posts-header h1 {
+    /* Fonte responsiva:
+       mínimo: 1.75rem
+       preferencial: 3vw
+       máximo: 2rem */
+    font-size: clamp(1.75rem, 3vw, 2rem);
+
+    /* Destaca o título */
+    font-weight: 700;
+
+    /* Espaçamento entre as linhas */
+    line-height: 1.25;
+
+    /* Separa o título da descrição */
+    margin-bottom: 8px;
+}
+
+
+/* Texto descritivo abaixo do título */
+
+.posts-description {
+    /* Cor secundária para informações auxiliares */
+    color: #475569;
+}
+
+
+/* ========================================
+   2. Grade de postagens
+   Organiza os cards de forma responsiva
+======================================== */
+
+.posts-grid {
+    /* Ativa o sistema CSS Grid */
+    display: grid;
+
+    /* Cria colunas automaticamente:
+       - auto-fit: ajusta a quantidade de colunas
+       - min(): permite reduzir a largura em telas pequenas
+       - 1fr: distribui o espaço disponível */
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 280px), 1fr)
+    );
+
+    /* Espaçamento entre os cards */
+    gap: 20px;
+}
+
+
+/* ========================================
+   3. Estado vazio
+   Exibido quando não existem postagens
+======================================== */
+
+.posts-empty {
+    /* Ocupa toda a largura da grade */
+    grid-column: 1 / -1;
+
+    /* Espaçamento interno */
+    padding: 32px;
+
+    /* Aparência visual */
+    border: 1px dashed #94a3b8;
+    border-radius: 12px;
+    background: #fff;
+}
+
+
+/* Título da mensagem de estado vazio */
+
+.posts-empty h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+
+/* Descrição da mensagem de estado vazio */
+
+.posts-empty p {
+    margin-bottom: 16px;
+}
+
+
+/* ========================================
+   4. Paginação
+   Espaçamento dos controles de navegação
+======================================== */
+
+.posts-pagination {
+    /* Separa a paginação da grade de postagens */
+    margin-top: 28px;
+}

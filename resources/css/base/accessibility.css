@@ -1,0 +1,98 @@
+/* ========================================
+   BASE: ACESSIBILIDADE
+   Arquivo: base/accessibility.css
+
+   Responsável por:
+   - Facilitar a navegação por teclado
+   - Permitir acesso direto ao conteúdo principal
+   - Destacar visualmente o foco dos elementos
+   - Respeitar preferências de movimento reduzido
+
+   Compartilhado entre React e Blade.
+======================================== */
+
+
+/* ========================================
+   1. Link para pular ao conteúdo principal
+
+   Permite ignorar a navegação repetitiva e
+   acessar diretamente o conteúdo da página.
+
+   O link permanece fora da área visível até
+   receber foco durante a navegação por teclado.
+======================================== */
+
+.skip-link {
+    /* Posiciona o link independentemente do layout */
+    position: absolute;
+
+    /* Mantém o link fora da área visível inicialmente */
+    top: -100px;
+
+    /* Distância da borda esquerda */
+    left: 12px;
+
+    /* Espaçamento interno para facilitar a interação */
+    padding: 10px 14px;
+
+    /* Cores do link */
+    background: #fff;
+    color: #1e40af;
+
+    /* Mantém o link acima dos outros elementos */
+    z-index: 100;
+}
+
+/* Exibe o link quando ele recebe foco */
+
+.skip-link:focus {
+    top: 12px;
+}
+
+
+/* ========================================
+   2. Indicador visual de foco
+
+   Facilita a identificação do elemento
+   selecionado durante a navegação por teclado.
+
+   :focus-visible evita exibir o contorno
+   desnecessariamente em algumas interações
+   realizadas com o mouse.
+======================================== */
+
+:focus-visible {
+    /* Contorno azul de 3px */
+    outline: 3px solid #1d4ed8;
+
+    /* Afasta o contorno da borda do elemento */
+    outline-offset: 3px;
+}
+
+
+/* ========================================
+   3. Preferência por movimento reduzido
+
+   Respeita a configuração de acessibilidade
+   do sistema operacional do usuário.
+
+   Quando a preferência está ativada:
+   - Desativa rolagem suave
+   - Reduz a duração de animações
+   - Reduz a duração de transições
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        /* Evita movimentos de rolagem suave */
+        scroll-behavior: auto !important;
+
+        /* Reduz animações ao mínimo */
+        animation-duration: 0.01ms !important;
+
+        /* Reduz transições ao mínimo */
+        transition-duration: 0.01ms !important;
+    }
+}

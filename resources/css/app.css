@@ -1,11 +1,103 @@
+/* ========================================
+   ARQUIVO PRINCIPAL DE ESTILOS
+   Arquivo: resources/css/app.css
+
+   Responsável por:
+   - Inicializar o Tailwind CSS 4
+   - Importar os estilos modulares
+   - Configurar as fontes de classes Tailwind
+   - Definir o tema visual da aplicação
+
+   Compartilhado entre:
+   - React + Inertia.js
+   - Laravel Blade (durante a migração)
+
+   Os estilos específicos devem permanecer
+   nos respectivos arquivos CSS.
+======================================== */
+
+
+/* ========================================
+   1. Framework CSS
+======================================== */
+
 @import 'tailwindcss';
 
+
+/* ========================================
+   2. Estilos globais
+======================================== */
+
+/* Tipografia, cores e estrutura da aplicação */
+@import './base/global.css';
+
+/* Navegação por teclado e acessibilidade */
+@import './base/accessibility.css';
+
+
+/* ========================================
+   3. Componentes compartilhados
+======================================== */
+
+/* Cabeçalho e navegação principal */
+@import './components/header.css';
+
+/* Botões primários e secundários */
+@import './components/buttons.css';
+
+/* Mensagens de sucesso e erro */
+@import './components/alerts.css';
+
+/* Cards utilizados na listagem de postagens */
+@import './components/post-card.css';
+
+/* Formulários de autenticação e CRUD */
+@import './components/forms.css';
+
+/* ========================================
+   4. Estilos específicos das páginas
+======================================== */
+
+/* Página inicial */
+@import './pages/home.css';
+
+/* Listagem de postagens */
+@import './pages/posts.css';
+
+/* Página de detalhes de uma postagem */
+@import './pages/post-show.css';
+
+/* ========================================
+   5. Fontes de classes Tailwind
+
+   Informa ao Tailwind onde procurar classes
+   utilizadas na aplicação.
+======================================== */
+
+/* Componentes de paginação do Laravel */
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+/* Views compiladas pelo Laravel */
 @source '../../storage/framework/views/*.php';
+
+/* Templates Blade */
 @source '../**/*.blade.php';
+
+/* Arquivos JavaScript */
 @source '../**/*.js';
 
+/* Arquivos TypeScript */
+@source '../**/*.ts';
+
+/* Componentes React com TypeScript */
+@source '../**/*.tsx';
+
+
+/* ========================================
+   6. Tema da aplicação
+======================================== */
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Família de fontes padrão */
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 }

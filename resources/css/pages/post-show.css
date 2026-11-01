@@ -1,0 +1,187 @@
+/* ========================================
+   PÁGINA: DETALHES DA POSTAGEM
+   Arquivo: pages/post-show.css
+
+   Responsável por:
+   - Apresentar uma postagem completa
+   - Destacar título, autor e conteúdo
+   - Organizar a seção de comentários
+   - Manter o layout responsivo
+
+   Reutilizável em Blade e React + Inertia.
+======================================== */
+
+
+/* ========================================
+   1. Container da postagem
+======================================== */
+
+.post-detail {
+    /* Limita a largura para facilitar a leitura */
+    width: 100%;
+    max-width: 800px;
+
+    /* Espaçamento interno */
+    padding: 24px;
+
+    /* Aparência do painel */
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+
+    /* Separação da seção de comentários */
+    margin-bottom: 32px;
+}
+
+
+/* ========================================
+   2. Título da postagem
+======================================== */
+
+.post-detail-title {
+    /* Destaque e tamanho responsivo */
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.3;
+
+    /* Evita transbordamento de palavras longas */
+    overflow-wrap: anywhere;
+
+    /* Espaçamento inferior */
+    margin-bottom: 12px;
+}
+
+
+/* ========================================
+   3. Metadados da postagem
+   Exemplo: autor e data de publicação
+======================================== */
+
+.post-detail-meta {
+    /* Informação visual secundária */
+    color: #475569;
+    font-size: 0.875rem;
+
+    /* Separa os metadados do conteúdo */
+    margin-bottom: 24px;
+}
+
+
+/* ========================================
+   4. Conteúdo completo da postagem
+======================================== */
+
+.post-detail-content {
+    /* Tipografia e legibilidade */
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.8;
+
+    /* Preserva quebras de linha do texto */
+    white-space: pre-wrap;
+
+    /* Evita que textos longos ultrapassem o painel */
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   5. Seção de comentários
+======================================== */
+
+.comments-section {
+    /* Mantém a mesma largura da postagem */
+    width: 100%;
+    max-width: 800px;
+
+    /* Separa visualmente a seção */
+    margin-top: 32px;
+}
+
+/* Título da seção de comentários */
+
+.comments-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   6. Card individual de comentário
+======================================== */
+
+.comment-card {
+    /* Espaçamento interno */
+    padding: 20px;
+
+    /* Aparência consistente com a postagem */
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+
+    /* Espaçamento entre comentários */
+    margin-bottom: 16px;
+}
+
+
+/* ========================================
+   7. Nome do autor do comentário
+======================================== */
+
+.comment-author {
+    /* Destaque do autor */
+    font-weight: 700;
+    color: #1f2937;
+
+    /* Separação do texto */
+    margin-bottom: 8px;
+}
+
+
+/* ========================================
+   8. Conteúdo do comentário
+======================================== */
+
+.comment-content {
+    /* Legibilidade */
+    color: #334155;
+    line-height: 1.7;
+
+    /* Preserva quebras de linha */
+    white-space: pre-wrap;
+
+    /* Evita transbordamento */
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   9. Ações da postagem
+======================================== */
+
+.post-detail-actions {
+    /* Agrupa os botões de edição, exclusão e retorno */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    /* Espaçamento entre os controles */
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+/* ========================================
+   10. Responsividade
+======================================== */
+
+@media (max-width: 600px) {
+    .post-detail {
+        /* Reduz espaçamento em telas pequenas */
+        padding: 16px;
+    }
+
+    .comment-card {
+        padding: 16px;
+    }
+}

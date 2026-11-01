@@ -1,0 +1,126 @@
+/* ========================================
+   COMPONENTE: CARD DE POSTAGEM
+   Arquivo: components/post-card.css
+
+   Responsável pela apresentação visual
+   das postagens na listagem.
+
+   Utilizado em:
+   - React: Pages/Posts/Index.tsx
+   - Blade: páginas de postagens ainda não migradas
+======================================== */
+
+
+/* ========================================
+   1. Estrutura principal do card
+======================================== */
+
+.post-card {
+    /* Organiza os elementos verticalmente */
+    display: flex;
+    flex-direction: column;
+
+    /* Espaçamento entre os elementos internos */
+    gap: 12px;
+
+    /* Espaçamento interno do card */
+    padding: 24px;
+
+    /* Aparência visual */
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+}
+
+
+/* ========================================
+   2. Título da postagem
+======================================== */
+
+.post-card-title {
+    /* Tamanho e espaçamento entre linhas */
+    font-size: 1.25rem;
+    line-height: 1.4;
+
+    /* Destaque do título */
+    font-weight: 700;
+
+    /* Evita que palavras longas ultrapassem o card */
+    overflow-wrap: anywhere;
+}
+
+
+/* Links dentro do título */
+
+.post-card-title a {
+    /* Define a cor do link */
+    color: #1e3a8a;
+
+    /* Remove o sublinhado padrão */
+    text-decoration: none;
+}
+
+
+/* Feedback visual ao passar o mouse */
+
+.post-card-title a:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   3. Metadados da postagem
+   Exemplo: autor e data de publicação
+======================================== */
+
+.post-card-meta {
+    /* Cor secundária para informações auxiliares */
+    color: #475569;
+
+    /* Fonte menor que o texto principal */
+    font-size: 0.875rem;
+}
+
+
+/* ========================================
+   4. Resumo do conteúdo
+======================================== */
+
+.post-card-excerpt {
+    /* Cor do texto do resumo */
+    color: #334155;
+
+    /* Melhora a legibilidade de textos extensos */
+    line-height: 1.7;
+
+    /* Evita transbordamento de palavras longas */
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   5. Link para visualizar a postagem
+======================================== */
+
+.post-card-link {
+    /* Evita que o link ocupe toda a largura */
+    align-self: flex-start;
+
+    /* Empurra o link para o final do card.
+       Funciona porque .post-card usa flexbox */
+    margin-top: auto;
+
+    /* Aparência do link */
+    color: #1e40af;
+    font-weight: 600;
+
+    /* Afasta o sublinhado das letras */
+    text-underline-offset: 3px;
+}
+
+
+/* Destaca o sublinhado ao passar o mouse */
+
+.post-card-link:hover {
+    text-decoration-thickness: 2px;
+}

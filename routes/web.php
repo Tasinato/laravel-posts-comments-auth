@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,3 +96,35 @@ Route::middleware('auth')->group(function () {
     Route::resource('comments', CommentController::class)
         ->only(['edit', 'update', 'destroy']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Teste de integração Laravel + React + Inertia.js
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/react-test', function () {
+    return Inertia::render('ReactTest');
+})->name('react.test');
+
+
+/*|--------------------------------------------------------------------------
+| Teste de integração Laravel + React + Inertia.js - Listagem de postagens
+|-- ------------------------------------------------------------------------*/       
+
+Route::get('/react-posts-test', function () {
+    return Inertia::render('Posts/Index', [
+        'posts' => \App\Models\Post::query()
+            ->with('user:id,name')
+            ->latest()
+            ->paginate(10)
+            ->through(fn ($post) => [
+                'id' => $post->id,
+                'title' => $post->title,
+                'content' => $post->content,
+                'author' => $post->user->name,
+                'created_at' => $post->created_at?->format('d/m/Y'),
+                'url' => route('posts.show', $post),
+            ]),
+    ]);
+})->name('react.posts.test');

@@ -1,0 +1,67 @@
+/* ========================================
+   COMPONENTE: MENSAGENS E NOTIFICAÇÕES
+   Arquivo: components/alerts.css
+
+   Responsável pela apresentação visual
+   de mensagens de sucesso e erro.
+
+   Utilizado em:
+   - Confirmação de operações do CRUD
+   - Mensagens de erro da aplicação
+   - Interfaces Blade e React
+
+   Estrutura:
+   .alert         -> Estilo base
+   .alert-success -> Mensagem de sucesso
+   .alert-error   -> Mensagem de erro
+======================================== */
+
+
+/* ========================================
+   1. Estilo base das mensagens
+======================================== */
+
+.alert {
+    /* Espaçamento interno da mensagem */
+    padding: 12px 16px;
+
+    /* Arredonda os cantos */
+    border-radius: 6px;
+
+    /* Separa a mensagem dos elementos abaixo */
+    margin-bottom: 24px;
+}
+
+
+/* ========================================
+   2. Mensagem de sucesso
+   Exemplo: Postagem criada com sucesso
+======================================== */
+
+.alert-success {
+    /* Fundo verde-claro */
+    background: #dcfce7;
+
+    /* Texto verde-escuro para contraste */
+    color: #14532d;
+
+    /* Borda verde para delimitar a mensagem */
+    border: 1px solid #86efac;
+}
+
+
+/* ========================================
+   3. Mensagem de erro
+   Exemplo: Não foi possível salvar a postagem
+======================================== */
+
+.alert-error {
+    /* Fundo vermelho-claro */
+    background: #fee2e2;
+
+    /* Texto vermelho-escuro para contraste */
+    color: #7f1d1d;
+
+    /* Borda vermelha para delimitar a mensagem */
+    border: 1px solid #fca5a5;
+}

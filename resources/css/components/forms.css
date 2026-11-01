@@ -1,0 +1,87 @@
+/* ========================================
+   COMPONENTE: FORMULÁRIOS
+   Arquivo: components/forms.css
+
+   Responsável pela apresentação de:
+   - Campos de texto e e-mail
+   - Campos de senha
+   - Rótulos
+   - Formulários de autenticação e CRUD
+======================================== */
+
+/* Campos de entrada */
+
+.form-input,
+.form-textarea {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+
+    font: inherit;
+    color: #1f2937;
+    background: #fff;
+
+    border: 1px solid #94a3b8;
+    border-radius: 8px;
+}
+
+/* Textarea */
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Rótulos */
+
+.form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* Espaçamento entre campos */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Formulário de autenticação */
+
+.auth-form {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 440px;
+    padding: 24px;
+
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+}
+
+/* Título dos formulários de autenticação */
+
+.auth-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    color: #1f2937;
+}
+
+/* Mensagens de validação */
+
+.form-error {
+    margin-top: 6px;
+    color: #991b1b;
+    font-size: 0.875rem;
+}
+
+/* Destaque de campos inválidos */
+
+.form-input[aria-invalid="true"],
+.form-textarea[aria-invalid="true"] {
+    border-color: #b91c1c;
+}

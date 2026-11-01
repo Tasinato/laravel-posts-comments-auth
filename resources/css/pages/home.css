@@ -1,0 +1,104 @@
+/* ========================================
+   PÁGINA: INICIAL (HOME)
+   Arquivo: pages/home.css
+
+   Responsável pela apresentação visual
+   da página inicial da aplicação.
+
+   Utilizado em:
+   - Blade: views/welcome.blade.php
+   - Futuramente: React (Home.tsx)
+
+   Componentes reutilizados:
+   - components/buttons.css
+   - base/global.css
+======================================== */
+
+
+/* ========================================
+   1. Seção principal de boas-vindas
+======================================== */
+
+.welcome-section {
+    /* Limita a largura para melhorar a leitura */
+    max-width: 760px;
+
+    /* Espaçamento superior e inferior */
+    padding-block: 32px;
+}
+
+
+/* ========================================
+   2. Título principal
+======================================== */
+
+.welcome-section h1 {
+    /* Tamanho responsivo da fonte:
+       mínimo: 1.75rem
+       preferencial: 4vw
+       máximo: 2.5rem */
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+
+    /* Destaca o título principal */
+    font-weight: 700;
+
+    /* Controla o espaçamento entre linhas */
+    line-height: 1.2;
+
+    /* Espaçamento abaixo do título */
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   3. Texto de apresentação
+======================================== */
+
+.welcome-section p {
+    /* Fonte ligeiramente maior para leitura */
+    font-size: 1.05rem;
+
+    /* Melhora a legibilidade de textos longos */
+    line-height: 1.7;
+
+    /* Separa os parágrafos */
+    margin-bottom: 16px;
+}
+
+
+/* ========================================
+   4. Área de ações
+   Exemplos: Ver postagens e Cadastrar
+======================================== */
+
+.welcome-actions {
+    /* Organiza os botões lado a lado */
+    display: flex;
+
+    /* Permite que os botões mudem de linha */
+    flex-wrap: wrap;
+
+    /* Espaçamento entre os botões */
+    gap: 12px;
+
+    /* Distância entre texto e ações */
+    margin-top: 28px;
+}
+
+
+/* ========================================
+   5. Responsividade
+   Telas com largura máxima de 480px
+======================================== */
+
+@media (max-width: 480px) {
+    .welcome-actions {
+        /* Organiza os botões verticalmente */
+        flex-direction: column;
+    }
+
+    .welcome-actions .button {
+        /* Faz os botões ocuparem toda a largura */
+        width: 100%;
+    }
+}

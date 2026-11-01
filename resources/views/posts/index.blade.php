@@ -1,31 +1,80 @@
+
 @extends('layouts.app')
 
+@section('title', 'Postagens | Laravel Posts & Comments')
+
 @section('content')
-    <h2>Postagens</h2>
+    <section aria-labelledby="posts-title">
 
-    @auth
-        <p>
-            <a href="{{ route('posts.create') }}">
-                Nova postagem
-            </a>
-        </p>
-    @endauth
+        <div class="posts-header">
+            <div>
+                <h1 id="posts-title">Postagens</h1>
+                <p class="posts-description">
+                    Explore as publicações e participe das conversas.
+                </p>
+            </div>
 
-    @forelse ($posts as $post)
-        <article>
-            <h3>
-                <a href="{{ route('posts.show', $post) }}">
-                    {{ $post->title }}
+            @auth
+                <a href="{{ route('posts.create') }}"
+                   class="button button-primary">
+                    Nova postagem
                 </a>
-            </h3>
+            @endauth
+        </div>
 
-            <p>Autor: {{ $post->user->name }}</p>
-            <p>{{ Str::limit($post->content, 150) }}</p>
-        </article>
-        <hr>
-    @empty
-        <p>Nenhuma postagem cadastrada.</p>
-    @endforelse
+        <div class="posts-grid">
+            @forelse ($posts as $post)
+                <article class="post-card">
+                    <h2 class="post-card-title">
+                        <a href="{{ route('posts.show', $post) }}">
+                            {{ $post->title }}
+                        </a>
+                    </h2>
 
-    {{ $posts->links() }}
+                    <p class="post-card-meta">
+                        Por {{ $post->user->name }}
+                        @if ($post->created_at)
+                            ·
+                            <time datetime="{{ $post->created_at->toDateString() }}">
+                                {{ $post->created_at->format('d/m/Y') }}
+                            </time>
+                        @endif
+                    </p>
+
+                    <p class="post-card-excerpt">
+                        {{ \Illuminate\Support\Str::limit($post->content, 150) }}
+                    </p>
+
+                    <a href="{{ route('posts.show', $post) }}"
+                       class="post-card-link"
+                       aria-label="Ler postagem: {{ $post->title }}">
+                        Ler postagem
+                    </a>
+                </article>
+            @empty
+                <div class="posts-empty">
+                    <h2>Nenhuma postagem cadastrada</h2>
+                    <p>
+                        Ainda não existem publicações disponíveis.
+                    </p>
+
+                    @auth
+                        <a href="{{ route('posts.create') }}"
+                           class="button button-primary">
+                            Criar primeira postagem
+                        </a>
+                    @else
+                        <p>
+                            <a href="{{ route('login') }}">Entre na sua conta</a>
+                            para começar a publicar.
+                        </p>
+                    @endauth
+                </div>
+            @endforelse
+        </div>
+
+        <div class="posts-pagination">
+            {{ $posts->links() }}
+        </div>
+    </section>
 @endsection

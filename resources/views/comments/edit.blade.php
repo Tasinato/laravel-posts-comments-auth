@@ -1,37 +1,49 @@
-
 @extends('layouts.app')
 
+@section('title', 'Editar comentário — Laravel Posts & Comments')
+
 @section('content')
-    <h2>Editar comentário</h2>
+    <section class="post-detail" aria-labelledby="edit-comment-title">
+        <h1 id="edit-comment-title" class="auth-title">
+            Editar comentário
+        </h1>
 
-    <form
-        action="{{ route('comments.update', $comment) }}"
-        method="POST"
-    >
-        @csrf
-        @method('PUT')
+        <form action="{{ route('comments.update', $comment) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <p>
-            <label for="content">Comentário</label><br>
+            <div class="form-group">
+                <label for="content" class="form-label">Comentário</label>
 
-            <textarea
-                id="content"
-                name="content"
-                rows="5"
-                required
-            >{{ old('content', $comment->content) }}</textarea>
+                <textarea
+                    id="content"
+                    name="content"
+                    class="form-textarea"
+                    rows="5"
+                    required
+                    @error('content')
+                        aria-invalid="true"
+                        aria-describedby="content-error"
+                    @enderror
+                >{{ old('content', $comment->content) }}</textarea>
 
-            @error('content')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-        </p>
+                @error('content')
+                    <p id="content-error" class="form-error">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <button type="submit">Salvar alterações</button>
-    </form>
+            <div class="action-group">
+                <button type="submit" class="button button-primary">
+                    Salvar alterações
+                </button>
 
-    <p>
-        <a href="{{ route('posts.show', $comment->post_id) }}">
-            Voltar à postagem
-        </a>
-    </p>
+                <a
+                    href="{{ route('posts.show', $comment->post_id) }}"
+                    class="button button-secondary"
+                >
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </section>
 @endsection

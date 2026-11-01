@@ -1,0 +1,185 @@
+/* ========================================
+   COMPONENTE: CABEÇALHO E NAVEGAÇÃO
+   Arquivo: components/header.css
+
+   Responsável por:
+   - Identidade visual da aplicação
+   - Navegação principal
+   - Identificação do usuário autenticado
+   - Botão de logout
+   - Responsividade do cabeçalho
+
+   Compartilhado entre Blade e React.
+======================================== */
+
+
+/* ========================================
+   1. Cabeçalho principal
+======================================== */
+
+.site-header {
+    /* Fundo branco e borda inferior */
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header-content {
+    /* Organiza a marca e o menu horizontalmente */
+    display: flex;
+
+    /* Alinha verticalmente os elementos */
+    align-items: center;
+
+    /* Distribui marca e navegação nas extremidades */
+    justify-content: space-between;
+
+    /* Permite quebra de linha em espaços menores */
+    flex-wrap: wrap;
+
+    /* Espaçamento entre os elementos */
+    gap: 16px;
+
+    /* Espaçamento vertical do cabeçalho */
+    padding-block: 20px;
+}
+
+
+/* ========================================
+   2. Identidade visual
+======================================== */
+
+.site-brand {
+    /* Tamanho e destaque do nome da aplicação */
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    /* Cor institucional azul */
+    color: #1e3a8a;
+
+    /* Remove o sublinhado padrão */
+    text-decoration: none;
+}
+
+
+/* ========================================
+   3. Navegação principal
+======================================== */
+
+.site-nav {
+    /* Organiza os links horizontalmente */
+    display: flex;
+
+    /* Permite quebra de linha em telas estreitas */
+    flex-wrap: wrap;
+
+    /* Alinha os itens verticalmente */
+    align-items: center;
+
+    /* Espaçamento entre links e botões */
+    gap: 16px;
+}
+
+/* Estilos compartilhados entre links e logout */
+
+.site-nav a,
+.nav-logout {
+    /* Herda a fonte do elemento pai */
+    font: inherit;
+
+    /* Cor padrão dos elementos interativos */
+    color: #1e40af;
+
+    /* Permite alinhamento consistente */
+    display: inline-flex;
+    align-items: center;
+
+    /* Define a altura mínima */
+    min-height: 40px;
+
+    /* Espaçamento interno */
+    padding: 6px 8px;
+
+    /* Bordas levemente arredondadas */
+    border-radius: 6px;
+}
+
+/* Remove o sublinhado padrão dos links */
+
+.site-nav a {
+    text-decoration: none;
+}
+
+/* Remove margens dos formulários do menu */
+
+.site-nav form {
+    margin: 0;
+}
+
+
+/* ========================================
+   4. Estados interativos
+======================================== */
+
+/* Feedback ao passar o mouse */
+
+.site-nav a:hover,
+.nav-logout:hover {
+    background: #eff6ff;
+    text-decoration: underline;
+}
+
+/* Destaca o foco durante navegação por teclado */
+
+.site-nav a:focus-visible,
+.nav-logout:focus-visible {
+    outline: 3px solid #1d4ed8;
+    outline-offset: 3px;
+}
+
+
+/* ========================================
+   5. Usuário autenticado
+======================================== */
+
+.nav-user {
+    /* Diferencia o nome do usuário dos links */
+    color: #334155;
+
+    /* Destaque moderado */
+    font-weight: 500;
+}
+
+
+/* ========================================
+   6. Botão de logout
+======================================== */
+
+.nav-logout {
+    /* Exibe o cursor de interação */
+    cursor: pointer;
+
+    /* Remove aparência padrão do botão */
+    border: 0;
+    background: transparent;
+}
+
+
+/* ========================================
+   7. Responsividade
+   Telas com largura máxima de 600px
+======================================== */
+
+@media (max-width: 600px) {
+    .header-content {
+        /* Alinha os elementos à esquerda */
+        align-items: flex-start;
+
+        /* Coloca marca e navegação verticalmente */
+        flex-direction: column;
+    }
+
+    .site-nav {
+        /* Reduz o espaçamento entre os links */
+        gap: 12px;
+    }
+}

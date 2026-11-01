@@ -1,0 +1,64 @@
+/* ========================================
+   BASE: ESTILOS GLOBAIS
+   Arquivo: base/global.css
+
+   Responsável pelas configurações visuais
+   compartilhadas por toda a aplicação.
+
+   Utilizado em:
+   - Páginas React + Inertia.js
+   - Páginas Blade durante a migração
+
+   Responsabilidades:
+   - Tipografia global
+   - Cores de texto e fundo
+   - Largura e centralização do conteúdo
+   - Espaçamento da área principal
+======================================== */
+
+
+/* ========================================
+   1. Configurações gerais da aplicação
+======================================== */
+
+body {
+    /* Remove a margem padrão do navegador */
+    margin: 0;
+
+    /* Utiliza a fonte configurada no tema Tailwind */
+    font-family: var(--font-sans);
+
+    /* Define o espaçamento entre linhas */
+    line-height: 1.6;
+
+    /* Cor padrão dos textos */
+    color: #1f2937;
+
+    /* Cor de fundo da aplicação */
+    background: #f8fafc;
+}
+
+
+/* ========================================
+   2. Container principal
+   Centraliza e limita a largura do conteúdo
+======================================== */
+
+.site-container {
+    /* Ocupa a largura disponível com margens
+       laterais de 16px e limite de 960px */
+    width: min(100% - 32px, 960px);
+
+    /* Centraliza horizontalmente */
+    margin-inline: auto;
+}
+
+
+/* ========================================
+   3. Área principal da página
+======================================== */
+
+.main-content {
+    /* Adiciona 32px de espaço acima e abaixo */
+    padding-block: 32px;
+}

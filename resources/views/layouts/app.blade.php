@@ -3,51 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel Posts & Comments</title>
+
+    <title>@yield('title', 'Laravel Posts & Comments')</title>
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body style="font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; padding: 15px;">
+<body>
+    <a class="skip-link" href="#conteudo-principal">
+        Pular para o conteúdo principal
+    </a>
 
-    <header>
-        <h1>Laravel Posts & Comments</h1>
+    <header class="site-header">
+        <div class="site-container header-content">
+            <a class="site-brand" href="{{ route('home') }}">
+                Laravel Posts & Comments
+            </a>
 
-        <nav>
-            <a href="{{ route('home') }}">Início</a> 
-            | <a href="{{ route('posts.index') }}">Postagens</a>
+            <nav class="site-nav" aria-label="Navegação principal">
+                <a href="{{ route('home') }}">Início</a>
+                <a href="{{ route('posts.index') }}">Postagens</a>
 
-            @guest
-                | <a href="{{ route('login') }}">Entrar</a>
-                | <a href="{{ route('register') }}">Cadastrar</a>
-            @endguest
+                @guest
+                    <a href="{{ route('login') }}">Entrar</a>
+                    <a href="{{ route('register') }}">Cadastrar</a>
+                @endguest
 
-            @auth
-                | <a href="{{ route('dashboard') }}">Painel</a>
+                @auth
+                    {{-- Identificação do usuário autenticado --}}
+                    <span class="nav-user">
+                        Olá, {{ auth()->user()->name }}
+                    </span>
 
-                <form action="{{ route('logout') }}" method="POST"
-                      style="display: inline;">
-                    @csrf
-                    <button type="submit">Sair</button>
-                </form>
-            @endauth
+                    {{-- Acesso ao painel --}}
+                    <a href="{{ route('dashboard') }}">
+                        Painel
+                    </a>
 
-            
+                    {{-- Encerramento seguro da sessão --}}
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
 
-
-        </nav>
+                        <button type="submit" class="nav-logout">
+                            Sair
+                        </button>
+                    </form>
+                @endauth
+            </nav>
+        </div>
     </header>
 
-    <hr>
+    <main id="conteudo-principal" class="site-container main-content">
+        @if (session('success'))
+            <div class="alert alert-success" role="status">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    @if (session('success'))
-        <p style="color: green;">
-            {{ session('success') }}
-        </p>
-    @endif
+        @if (session('error'))
+            <div class="alert alert-error" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
 
-
-    <main>
         @yield('content')
     </main>
-
 </body>
 </html>

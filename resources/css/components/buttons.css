@@ -1,0 +1,110 @@
+/* ========================================
+   COMPONENTE: BOTÕES
+   Arquivo: components/buttons.css
+
+   Responsável pela aparência dos botões
+   e links estilizados como botões.
+
+   Utilizado em:
+   - Página inicial
+   - Formulários de postagens
+   - Formulários de comentários
+   - Interfaces React e Blade
+
+   Estrutura:
+   .button           -> Estilo base
+   .button-primary   -> Ação principal
+   .button-secondary -> Ação secundária
+======================================== */
+
+
+/* ========================================
+   1. Estilo base dos botões
+======================================== */
+
+.button {
+    /* Permite alinhar texto e ícones lado a lado */
+    display: inline-flex;
+
+    /* Centraliza o conteúdo horizontalmente */
+    align-items: center;
+    justify-content: center;
+
+    /* Garante uma altura mínima para interação */
+    min-height: 44px;
+
+    /* Define o espaçamento interno */
+    padding: 12px 20px;
+
+    /* Arredonda as bordas */
+    border-radius: 8px;
+
+    /* Destaca o texto do botão */
+    font-weight: 600;
+
+    /* Remove o sublinhado dos links */
+    text-decoration: none;
+
+    /* Indica que o elemento é interativo */
+    cursor: pointer;
+}
+
+
+/* ========================================
+   2. Botão primário
+   Utilizado para ações principais
+   Exemplos: Salvar, Publicar, Confirmar
+======================================== */
+
+.button-primary {
+    /* Fundo azul */
+    background: #1d4ed8;
+
+    /* Texto branco para contraste */
+    color: #fff;
+}
+
+
+/* Estado hover do botão primário */
+
+.button-primary:hover {
+    /* Escurece o fundo ao passar o mouse */
+    background: #1e40af;
+}
+
+
+/* ========================================
+   3. Botão secundário
+   Utilizado para ações complementares
+   Exemplos: Cancelar, Voltar, Visualizar
+======================================== */
+
+.button-secondary {
+    /* Fundo branco */
+    background: #fff;
+
+    /* Texto azul */
+    color: #1e40af;
+
+    /* Borda azul */
+    border: 1px solid #1e40af;
+}
+
+
+/* Estado hover do botão secundário */
+
+.button-secondary:hover {
+    /* Fundo azul-claro ao passar o mouse */
+    background: #eff6ff;
+}
+
+
+/* Agrupamento de botões e ações */
+
+.action-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-block: 20px;
+}
