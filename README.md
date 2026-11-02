@@ -13,7 +13,7 @@
 
 Aplicação web em **Laravel 12** para gerenciamento de postagens e comentários. Qualquer pessoa pode ler conteúdo, usuários autenticados podem publicar, e **somente o autor** pode editar ou excluir cada postagem ou comentário.
 
-A interface principal do CRUD utiliza **Blade**, com estilos CSS modulares e melhorias de responsividade e acessibilidade. A integração com **React + TypeScript + Inertia.js** está iniciada, com layout compartilhado e uma listagem experimental de postagens. A migração do CRUD para React ainda não está concluída.
+O projeto oferece páginas **Blade** e uma interface **React + TypeScript + Inertia.js** para listagem, leitura, criação e edição de postagens e comentários. As interfaces compartilham estilos CSS modulares, validações e Policies no Laravel. Login, cadastro e painel continuam em Blade; a migração da aplicação inteira ainda não está concluída.
 
 Esta versão está na branch [feature/react-inertia-frontend](https://github.com/Tasinato/laravel-posts-comments-auth/tree/feature/react-inertia-frontend). O link do GitHub permite consultar o código; não representa uma aplicação hospedada.
 
@@ -40,7 +40,7 @@ Esta versão está na branch [feature/react-inertia-frontend](https://github.com
 | SQLite | Persistência relacional sem servidor dedicado |
 | Eloquent ORM | Models e relacionamentos |
 | Blade | Interface atual de autenticação e CRUD |
-| React, TypeScript e Inertia.js | Integração e páginas experimentais de frontend |
+| React, TypeScript e Inertia.js | Interface do CRUD em rotas paralelas às páginas Blade |
 | Tailwind CSS 4 e CSS modular | Estilos e responsividade |
 | Laravel Policies e Gate | Autorização por autoria |
 | PHPUnit | Testes automatizados |
@@ -176,7 +176,11 @@ Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run buil
 | `/posts/{id}/edit` | Editar postagem | Autor |
 | `/comments/{id}/edit` | Editar comentário | Autor |
 | `/react-test` | Teste da integração React/Inertia | Público, experimental |
-| `/react-posts-test` | Listagem React/Inertia | Público, experimental |
+| `/react-posts-test` | Listagem React/Inertia | Público |
+| `/react-posts-test/{id}` | Postagem e comentários em React | Leitura pública |
+| `/react-posts-test/create` | Nova postagem em React | Autenticado |
+| `/react-posts-test/{id}/edit` | Editar postagem em React | Autor |
+| `/react-comments-test/{id}/edit` | Editar comentário em React | Autor |
 
 Substitua `{id}` por um registro existente no seu banco. Cadastre sua própria conta para criar conteúdo; a instalação não pressupõe credenciais de demonstração.
 
@@ -201,7 +205,7 @@ php artisan test --filter=GuestAuthorizationTest
 
 Os testes cobrem leitura pública, criação autenticada, validação de campos obrigatórios, bloqueio de visitantes e edição/exclusão restritas ao autor. Os testes com dados usam `RefreshDatabase` e o ambiente de teste configurado no `phpunit.xml`.
 
-**Resultado da suíte completa informado pela execução local em 01/11/2026:** **21 testes aprovados, 58 asserções e nenhuma falha** (`php artisan test`).
+**Resultado da suíte completa informado pela execução local em 01/11/2026:** **28 testes aprovados, 83 asserções e nenhuma falha** (`php artisan test`).
 
 ### Vite nos testes
 
@@ -274,7 +278,7 @@ As etapas 1 a 8 registram o histórico do projeto. A etapa 9 reúne as melhorias
 - Rótulos de campos e mensagens de erro associadas por `aria-describedby` e `aria-invalid` quando há erro.
 - Link para pular ao conteúdo, foco visível e tratamento de movimento reduzido.
 - Botões de edição e exclusão condicionados às Policies.
-- Integração inicial React/Inertia e listagem experimental.
+- Páginas React/Inertia de listagem, leitura, criação e edição, com `useForm`, erros por campo e mensagens de sessão.
 
 #### 9.2. Verificações realizadas em 01/11/2026
 
@@ -284,17 +288,27 @@ As etapas 1 a 8 registram o histórico do projeto. A etapa 9 reúne as melhorias
 - Atualização de comentário confirmada por mensagem de sucesso.
 - Validação nativa de campo obrigatório confirmada no formulário de nova postagem.
 - Compilação dos assets concluída durante a revisão com `npm run build`.
-- Suíte Laravel: **21 testes aprovados e 58 asserções**.
+- Suíte Laravel atualizada: **28 testes aprovados e 83 asserções**. O grupo `ReactCrudTest` passou com **7 testes e 25 asserções**.
 
 #### 9.3. Verificações e melhorias pendentes
 
-- Conferir visualmente os erros retornados pelo Laravel e suas associações ARIA em execução; o aviso nativo de campo obrigatório não substitui essa verificação.
+- Ampliar a cobertura de validação para todos os formulários; erros de título, conteúdo e login já foram conferidos em execução com associações ARIA.
 - Ampliar a navegação manual por teclado, os testes de zoom e a cobertura de diferentes tamanhos de tela.
 - Avaliar com Lighthouse/axe e leitor de tela, como NVDA.
 - Revisar os critérios aplicáveis da WCAG 2.2 A e AA. Ainda não há declaração de conformidade completa.
-- Completar a migração do CRUD e da autenticação para React/Inertia, preservando as Policies.
+- Concluir a migração de autenticação e painel e ampliar a verificação dos fluxos React, preservando as Policies.
 
 As verificações visuais são amostrais e não substituem uma auditoria de acessibilidade ou testes completos de navegador.
+
+### Resultados adicionais da revisão React
+
+- Criação e edição de postagem e edição de comentário conferidas no navegador, com retorno às páginas React.
+- Mensagens de erro em português, associações ARIA e foco no primeiro campo inválido confirmados no formulário React de postagem.
+- Link de salto para o conteúdo principal validado no layout Blade com `tabindex="-1"`.
+- Alerta de sucesso React confirmado como `<output>` com `display: block`.
+- Envio de comentário sem sair da página React e limpeza do campo confirmados pelo usuário após atualizar `Show.tsx`.
+- Exclusão do comentário temporário 8 confirmada por recarregamento da postagem. A exclusão da postagem temporária 7 não foi confirmada; ela ainda apareceu na listagem após a tentativa e requer verificação manual.
+- A suíte de testes não equivale a uma auditoria completa de acessibilidade. Leitor de tela, movimento reduzido ativado e cobertura ampliada de teclado/zoom permanecem pendentes.
 
 ## Decisões técnicas
 
@@ -302,7 +316,7 @@ As verificações visuais são amostrais e não substituem uma auditoria de aces
 
 **Por que SQLite?** É relacional, leve e suficiente para um desafio pequeno, sem exigir infraestrutura de banco dedicada.
 
-**Por que Blade e React/Inertia coexistem?** Blade mantém o CRUD atual funcionando enquanto a integração React/Inertia evolui em páginas experimentais. A migração deve preservar a autenticação, as rotas de negócio e as Policies.
+**Por que Blade e React/Inertia coexistem?** As rotas Blade permanecem disponíveis enquanto o CRUD React é validado em rotas paralelas. Os controllers reutilizam validações e Policies e selecionam o redirecionamento conforme a requisição Inertia.
 
 **Por que Policies em vez de um RBAC com tabelas de papéis?** O enunciado prioriza simplicidade e exige somente restrição por autoria. Policies expressam essa regra diretamente e são testáveis. A solução não deve ser apresentada como RBAC formal.
 

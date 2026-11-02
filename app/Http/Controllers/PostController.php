@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    /**
+     * Listagem Blade com paginação.
+     */
     public function index(): View
     {
         $posts = Post::with('user')
@@ -20,11 +22,18 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    /**
+     * Formulário Blade de nova postagem.
+     * O formulário React utiliza a rota experimental.
+     */
     public function create(): View
     {
         return view('posts.create');
     }
 
+    /**
+     * Valida e cria uma postagem para o usuário autenticado.
+     */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -37,19 +46,24 @@ class PostController extends Controller
             ->create($validated);
 
         return redirect()
-            ->route('posts.show', $post)
+            ->route($this->showRoute($request), $post)
             ->with('success', 'Postagem criada com sucesso.');
     }
 
-    //Laravel carrega o autor da postagem "user", seus comentários "comments" e o autor de cada comentário.
-
+    /**
+     * Exibe a postagem em Blade com autor e comentários.
+     */
     public function show(Post $post): View
     {
-        $post->load(['user', 'comments.user',]);
+        $post->load(['user', 'comments.user']);
 
         return view('posts.show', compact('post'));
     }
 
+    /**
+     * Autoriza e abre a edição Blade.
+     * A edição React utiliza a rota experimental.
+     */
     public function edit(Post $post): View
     {
         Gate::authorize('update', $post);
@@ -57,8 +71,13 @@ class PostController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post): RedirectResponse
-    {
+    /**
+     * Autoriza, valida e atualiza a postagem.
+     */
+    public function update(
+        Request $request,
+        Post $post
+    ): RedirectResponse {
         Gate::authorize('update', $post);
 
         $validated = $request->validate([
@@ -69,40 +88,38 @@ class PostController extends Controller
         $post->update($validated);
 
         return redirect()
-            ->route('posts.show', $post)
+            ->route($this->showRoute($request), $post)
             ->with('success', 'Postagem atualizada com sucesso.');
     }
 
-
     /**
- * Gate::authorize('delete', $post);
- * consulta a Policy correspondente e lança uma exceção de autorização 
- * caso a ação seja negada, 
- * que o Laravel converte em HTTP 403.
- */
-
-    public function destroy(Post $post): RedirectResponse
-    {
+     * Exclui somente após autorização pela Policy.
+     */
+    public function destroy(
+        Request $request,
+        Post $post
+    ): RedirectResponse {
         Gate::authorize('delete', $post);
 
         $post->delete();
 
         return redirect()
-            ->route('posts.index')
+            ->route(
+                $request->header('X-Inertia')
+                    ? 'react.posts.test'
+                    : 'posts.index'
+            )
             ->with('success', 'Postagem excluída com sucesso.');
     }
+
+    /**
+     * Escolhe a página de retorno conforme a interface.
+     * A autorização permanece nas Policies.
+     */
+    private function showRoute(Request $request): string
+    {
+        return $request->header('X-Inertia')
+            ? 'react.posts.show.test'
+            : 'posts.show';
+    }
 }
-
-/*Para preservar a regra de negócio desde o início,
-* vamos verificar se o usuário autenticado é
-* o autor antes de permitir edição ou exclusão.
-* Na etapa 6, essas verificações serão transferidas para as Policies.
-*/
-
-
-/* Nesse controller, index() e show() 
-* permitem leitura pública; store()
-* associa o post ao usuário autenticado; 
-* e os métodos de alteração verificam a autoria.
-*/
-

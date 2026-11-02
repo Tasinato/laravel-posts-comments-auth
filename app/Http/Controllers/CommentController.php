@@ -17,14 +17,16 @@ class CommentController extends Controller
             'content' => ['required', 'string'],
         ]);
 
+        // Associa o comentário ao usuário autenticado.
         $comment = $post->comments()->make($validated);
-
         $comment->user()->associate($request->user());
-
         $comment->save();
 
         return redirect()
-            ->route('posts.show', $post)
+            ->route(
+                $this->showRoute($request),
+                $post
+            )
             ->with('success', 'Comentário criado com sucesso.');
     }
 
@@ -32,7 +34,8 @@ class CommentController extends Controller
     {
         Gate::authorize('update', $comment);
 
-
+        // Mantém a tela Blade existente.
+        // A edição React usa a rota experimental do pacote.
         return view('comments.edit', compact('comment'));
     }
 
@@ -49,25 +52,38 @@ class CommentController extends Controller
         $comment->update($validated);
 
         return redirect()
-            ->route('posts.show', $comment->post_id)
+            ->route(
+                $this->showRoute($request),
+                $comment->post_id
+            )
             ->with('success', 'Comentário atualizado com sucesso.');
     }
 
-    public function destroy(Comment $comment): RedirectResponse
-    {
+    public function destroy(
+        Request $request,
+        Comment $comment
+    ): RedirectResponse {
         Gate::authorize('delete', $comment);
 
         $postId = $comment->post_id;
-
         $comment->delete();
 
         return redirect()
-            ->route('posts.show', $postId)
+            ->route(
+                $this->showRoute($request),
+                $postId
+            )
             ->with('success', 'Comentário excluído com sucesso.');
     }
+
+    /**
+     * Escolhe o destino de retorno conforme a interface utilizada.
+     * O cabeçalho não concede permissão: a autorização continua nas Policies.
+     */
+    private function showRoute(Request $request): string
+    {
+        return $request->header('X-Inertia')
+            ? 'react.posts.show.test'
+            : 'posts.show';
+    }
 }
-
-/* O método store() recebe a postagem e o conteúdo do comentário. O usuário autenticado é associado automaticamente ao comentário, sem confiar em um user_id enviado pelo formulário.
-
-Os métodos edit(), update() e destroy() verificam a autoria antes de realizar a operação. Na etapa 6, essas verificações serão substituídas por chamadas às Laravel Policies.
-*/

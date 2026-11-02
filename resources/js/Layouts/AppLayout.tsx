@@ -10,6 +10,10 @@ type SharedProps = {
     auth?: {
         user: AuthUser | null;
     };
+    flash?: {
+        success?: string | null;
+        error?: string | null;
+    };
     [key: string]: unknown;
 };
 
@@ -21,9 +25,9 @@ function handleLogout() {
     router.post('/logout');
 }
 
-
 export default function AppLayout({ children }: AppLayoutProps) {
-    const { auth } = usePage<SharedProps>().props;
+    // Dados compartilhados pelo HandleInertiaRequests.
+    const { auth, flash } = usePage<SharedProps>().props;
     const user = auth?.user ?? null;
 
     return (
@@ -43,7 +47,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         aria-label="Navegação principal"
                     >
                         <a href="/">Início</a>
-                        <a href="/posts">Postagens</a>
+                        <a href="/react-posts-test">Postagens</a>
 
                         {user ? (
                             <>
@@ -76,6 +80,20 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 className="site-container main-content"
                 tabIndex={-1}
             >
+                {/* Confirmação da operação enviada pelo Laravel. */}
+                {flash?.success && (
+                    <output className="alert alert-success">
+                        {flash.success}
+                    </output>
+                )}
+
+                {/* Mensagem geral de erro enviada pelo Laravel. */}
+                {flash?.error && (
+                    <div className="alert alert-error" role="alert">
+                        {flash.error}
+                    </div>
+                )}
+
                 {children}
             </main>
         </>
