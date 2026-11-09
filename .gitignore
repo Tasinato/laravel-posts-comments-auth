@@ -26,3 +26,4 @@ Thumbs.db
 # SQLite - banco de dados local
 /database/*.sqlite
 /database/*.sqlite-*
+/.tools/

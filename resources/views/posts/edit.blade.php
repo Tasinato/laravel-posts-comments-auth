@@ -1,31 +1,14 @@
 @extends('layouts.app')
-
+@section('title', 'Editar postagem')
 @section('content')
-    <h2>Editar postagem</h2>
-
-    <form action="{{ route('posts.update', $post) }}"
-          method="POST">
-        @csrf
-        @method('PUT')
-
-        <p>
-            <label for="title">Título</label><br>
-            <input type="text" id="title" name="title"
-                   value="{{ old('title', $post->title) }}" required>
-            @error('title')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-        </p>
-
-        <p>
-            <label for="content">Conteúdo</label><br>
-            <textarea id="content" name="content"
-                      rows="6" required>{{ old('content', $post->content) }}</textarea>
-            @error('content')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-        </p>
-
-        <button type="submit">Salvar alterações</button>
-    </form>
+<div class="editor-width">
+<a class="back-link" href="{{ route('posts.show', $post) }}">← Voltar à postagem</a>
+<div class="page-heading">
+<p class="eyebrow">CUIDE DO QUE VOCÊ COMPARTILHA</p>
+<h1>Novas palavras.<br>A mesma <em>ideia.</em>
+</h1>
+<p>Revise sua postagem e salve as alterações.</p>
+</div>
+<form class="form-card" action="{{ route('posts.update', $post) }}" method="POST">@csrf @method('PUT') @include('posts._form')</form>
+</div>
 @endsection
