@@ -16,13 +16,15 @@
 <span class="card-label">SEU ESPAÇO DE TROCA</span>
 <h2 id="auth-heading">Entrar</h2>
 <p class="muted">Entre na sua conta para continuar compartilhando.</p>
+@if(session('status')) <div class="notice notice-success" role="status">{{ session('status') }}</div> @endif
 <form action="{{ route('login') }}" method="POST">@csrf
 <div class="field">
 <label for="email">E-mail</label>
-<input id="email" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>@error('email')<p id="email-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
+<input id="email" name="email" type="email" autocomplete="email" maxlength="255" required value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>@error('email')<p id="email-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
 <div class="field">
 <label for="password">Senha</label>
 <input id="password" name="password" type="password" autocomplete="current-password" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>@error('password')<p id="password-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
+<p class="recovery-link"><a class="text-link" href="{{ route('password.request') }}">Esqueci minha senha</a></p>
 <button class="button button-full" type="submit">Entrar <span aria-hidden="true">↗</span>
 </button>
 </form>

@@ -63,6 +63,20 @@ A revisão não é uma certificação de acessibilidade: auditorias com leitor d
 | Vite | Assets CSS e JavaScript |
 | Git e GitHub | Controle de versão |
 
+## Recuperação de senha e proteção de acesso
+
+- **Esqueci minha senha** no login, com link por e-mail válido por 60 minutos e uso único.
+- Resposta genérica na recuperação, limite de tentativas e validação no servidor.
+- Nova senha confirmada com mínimo de 12 caracteres; senha e token armazenados como hash.
+- Invalidação das sessões do usuário após redefinição, com o driver database.
+- Proteções CSRF, cabeçalhos de segurança e autorização por autoria preservadas.
+
+**Suíte atual: 39 testes aprovados e 171 asserções.** O envio foi testado com notificações simuladas, sem enviar e-mails reais. Para entrega real, configure SMTP e o endereço confiável da aplicação; o transporte padrão log é apenas para desenvolvimento.
+
+![Recuperação de senha](docs/images/recuperar-senha.jpg)
+
+Veja [configuração, evidências e limites de segurança](docs/security.md). A implementação não elimina todos os riscos nem substitui a configuração e a revisão de produção.
+
 ## Regras de acesso
 
 | Ação | Visitante | Usuário autenticado |

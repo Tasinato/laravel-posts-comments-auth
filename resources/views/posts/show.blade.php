@@ -14,7 +14,7 @@
 <time datetime="{{ $post->created_at->toDateString() }}">{{ $post->created_at->format('d/m/Y') }}</time>
 </div>
 <div class="post-content">{{ $post->content }}</div>
-<div class="resource-actions">@can('update', $post)<a class="button button-small button-outline" href="{{ route('posts.edit', $post) }}">Editar postagem</a>@endcan @can('delete', $post)<form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Excluir esta postagem e seus comentários? Esta ação não pode ser desfeita.')">@csrf @method('DELETE')<button class="danger-button" type="submit">Excluir postagem</button>
+<div class="resource-actions">@can('update', $post)<a class="button button-small button-outline" href="{{ route('posts.edit', $post) }}">Editar postagem</a>@endcan @can('delete', $post)<form action="{{ route('posts.destroy', $post) }}" method="POST" data-confirm="Excluir esta postagem e seus comentários? Esta ação não pode ser desfeita.">@csrf @method('DELETE')<button class="danger-button" type="submit">Excluir postagem</button>
 </form>@endcan</div>
 </article>
 <section class="comments-section" aria-labelledby="comments-heading">
@@ -34,7 +34,7 @@
 <time datetime="{{ $comment->created_at->toDateString() }}">{{ $comment->created_at->format('d/m/Y') }}</time>
 </div>
 <p class="comment-content">{{ $comment->content }}</p>
-<div class="resource-actions">@can('update', $comment)<a class="text-link" href="{{ route('comments.edit', $comment) }}">Editar comentário</a>@endcan @can('delete', $comment)<form action="{{ route('comments.destroy', $comment) }}" method="POST" onsubmit="return confirm('Excluir este comentário? Esta ação não pode ser desfeita.')">@csrf @method('DELETE')<button class="danger-button" type="submit">Excluir comentário</button>
+<div class="resource-actions">@can('update', $comment)<a class="text-link" href="{{ route('comments.edit', $comment) }}">Editar comentário</a>@endcan @can('delete', $comment)<form action="{{ route('comments.destroy', $comment) }}" method="POST" data-confirm="Excluir este comentário? Esta ação não pode ser desfeita.">@csrf @method('DELETE')<button class="danger-button" type="submit">Excluir comentário</button>
 </form>@endcan</div>
 </article>
 @empty <div class="comment-empty">

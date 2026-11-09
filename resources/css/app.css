@@ -1165,3 +1165,6 @@ p.field-hint {
         scroll-behavior: auto !important;
     }
 }
+
+.recovery-link { text-align: right; margin: -8px 0 12px; }
+.auth-card .notice { margin: 20px 0 0; }

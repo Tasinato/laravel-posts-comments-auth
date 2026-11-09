@@ -22,13 +22,14 @@
 <input id="name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" @error('name') aria-invalid="true" aria-describedby="name-error" @enderror>@error('name')<p id="name-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
 <div class="field">
 <label for="email">E-mail</label>
-<input id="email" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>@error('email')<p id="email-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
+<input id="email" name="email" type="email" autocomplete="email" maxlength="255" required value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>@error('email')<p id="email-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
 <div class="field">
 <label for="password">Senha</label>
-<input id="password" name="password" type="password" autocomplete="new-password" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>@error('password')<p id="password-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
+<p class="field-hint">Use pelo menos 12 caracteres. Prefira uma senha exclusiva ou uma frase longa.</p>
+<input id="password" name="password" type="password" autocomplete="new-password" minlength="12" required @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>@error('password')<p id="password-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
 <div class="field">
 <label for="password_confirmation">Confirmar senha</label>
-<input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required @error('password_confirmation') aria-invalid="true" aria-describedby="password_confirmation-error" @enderror>@error('password_confirmation')<p id="password_confirmation-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
+<input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" minlength="12" required @error('password_confirmation') aria-invalid="true" aria-describedby="password_confirmation-error" @enderror>@error('password_confirmation')<p id="password_confirmation-error" class="field-error" role="alert">{{ $message }}</p>@enderror</div>
 <button class="button button-full" type="submit">Criar minha conta <span aria-hidden="true">↗</span>
 </button>
 </form>
