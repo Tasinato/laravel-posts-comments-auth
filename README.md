@@ -4,8 +4,8 @@
 
 **CRUD de postagens e comentários com autenticação e autorização por autoria**
 
-![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.5.12%2B-777BB4?style=flat-square&logo=php&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Interface%20renovada-64748B?style=flat-square)
 
@@ -13,7 +13,7 @@
 
 ## Visão geral
 
-Aplicação web em **Laravel 12** para gerenciamento de postagens e comentários. Qualquer pessoa pode ler conteúdo, usuários autenticados podem publicar, e **somente o autor** pode editar ou excluir cada postagem ou comentário.
+Aplicação web em **Laravel 13** para gerenciamento de postagens e comentários. Qualquer pessoa pode ler conteúdo, usuários autenticados podem publicar, e **somente o autor** pode editar ou excluir cada postagem ou comentário.
 
 A solução prioriza simplicidade, legibilidade, segurança e testes automatizados, sem adicionar dependências desnecessárias.
 
@@ -56,7 +56,7 @@ A revisão não é uma certificação de acessibilidade: auditorias com leitor d
 
 | Tecnologia | Utilização |
 | --- | --- |
-| Laravel 12 e PHP 8.2+ | Backend e arquitetura MVC |
+| Laravel 13 e PHP 8.5.12+ | Backend e arquitetura MVC |
 | SQLite | Persistência relacional sem servidor dedicado |
 | Eloquent ORM | Models e relacionamentos |
 | Blade | Interface renderizada pelo servidor |
@@ -126,11 +126,17 @@ public function update(User $user, Post $post): bool
 
 Os controllers verificam as permissões, por exemplo, com `Gate::authorize('update', $post)`. Os botões podem ser exibidos condicionalmente com `@can`, mas a proteção efetiva ocorre **no backend**.
 
+## Versões atualizadas
+
+PHP 8.5.12+, Laravel 13.40, PHPUnit 13.4, Vite 8.3, Tailwind CSS 4.3 e Node.js 24. Os arquivos de lock registram as versões exatas instaladas. A CI confere a aplicação nesse novo conjunto de versões.
+
+A atualização do Laravel adota sessões em JSON e restringe a desserialização de objetos no cache. Sessões anteriores podem exigir novo login; contas, postagens e comentários permanecem no banco. Consulte [notas de atualização](docs/upgrade.md).
+
 ## Instalação
 
 ### Pré-requisitos
 
-PHP 8.2+, Composer, Node.js/npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO.
+PHP 8.5.12+, Composer, Node.js 24/npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO.
 
 ### Clonar e instalar
 
@@ -190,9 +196,9 @@ Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run buil
 
 ## Integração contínua (CI)
 
-O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, verifica alertas de segurança conhecidos com Composer e npm e aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.2 e 8.4**, com Node.js 22.
+O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, verifica alertas de segurança conhecidos com Composer e npm e aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.5**, com Node.js 24.
 
-O Composer resolve dependências para PHP 8.2, evitando gerar um lock incompatível ao instalar em versões mais recentes.
+O Composer resolve dependências para PHP 8.5.12. Node.js 24 é declarado em package.json e .nvmrc. Esta versão atualizada não oferece suporte a PHP 8.2–8.4.
 
 Os testes incluem login, recuperação de senha, expiração e uso único de token, bloqueio de tentativas, sessões e autorização por autoria. E-mails são simulados; nenhuma credencial de produção é usada. Os relatórios PHPUnit ficam nos artefatos por sete dias.
 
@@ -245,7 +251,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 
 
 ### 1. Configuração inicial
-- [x] Criar o projeto Laravel 12, configurar SQLite e ambiente local.
+- [x] Criar o projeto Laravel 13, configurar SQLite e ambiente local.
 - [x] Validar a aplicação e publicar o código inicial.
 
 ### 2. Autenticação
@@ -343,7 +349,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 
 ## Decisões técnicas
 
-**Por que Laravel 12?** Oferece MVC, validação, autenticação, persistência e autorização nativas, reduzindo código adicional.
+**Por que Laravel 13?** Oferece MVC, validação, autenticação, persistência e autorização nativas, reduzindo código adicional.
 
 **Por que SQLite?** É relacional, leve e suficiente para um desafio pequeno, sem exigir infraestrutura de banco dedicada.
 
@@ -371,4 +377,4 @@ A ferramenta foi utilizada como suporte ao processo de desenvolvimento. A execu�
 
 ---
 
-**Projeto de demonstração técnica desenvolvido com Laravel 12, PHP, SQLite e Blade.**
+**Projeto de demonstração técnica desenvolvido com Laravel 13, PHP, SQLite e Blade.**

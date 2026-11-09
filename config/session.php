@@ -20,6 +20,9 @@ return [
 
     'driver' => env('SESSION_DRIVER', 'database'),
 
+    // Laravel 13: não desserializar objetos PHP nas sessões. Requer novo login após a atualização.
+    'serialization' => 'json',
+
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
