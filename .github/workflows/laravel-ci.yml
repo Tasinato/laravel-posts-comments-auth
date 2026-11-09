@@ -1,0 +1,64 @@
+name: Laravel CI
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }} — tests and frontend build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.4']
+    env:
+      APP_ENV: testing
+      APP_DEBUG: 'false'
+      APP_URL: http://localhost
+      MAIL_MAILER: array
+      SESSION_DRIVER: array
+      CACHE_STORE: array
+      BCRYPT_ROUNDS: '4'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_sqlite, sqlite3
+          tools: composer:v2
+          coverage: none
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Validate dependency manifest and lock
+        run: composer validate --no-check-publish
+      - name: Install locked PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Prepare disposable environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate --force
+          touch database/database.sqlite
+          php artisan migrate --force
+      - name: Install locked frontend dependencies
+        run: npm ci
+      - name: Build frontend assets
+        run: npm run build
+      - name: Compile Blade templates
+        run: php artisan view:cache
+      - name: Run automated tests
+        run: php artisan test --log-junit=storage/logs/phpunit.xml
+      - name: Save test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpunit-php-${{ matrix.php }}
+          path: storage/logs/phpunit.xml
+          if-no-files-found: ignore
+          retention-days: 7

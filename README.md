@@ -1,5 +1,7 @@
 # Laravel Posts & Comments
 
+[![Laravel CI](https://github.com/Tasinato/laravel-posts-comments-auth/actions/workflows/laravel-ci.yml/badge.svg)](https://github.com/Tasinato/laravel-posts-comments-auth/actions/workflows/laravel-ci.yml)
+
 **CRUD de postagens e comentários com autenticação e autorização por autoria**
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white)
@@ -185,6 +187,14 @@ No Windows PowerShell, se `npm.ps1` for bloqueado, execute `npm.cmd run dev`.
 Acesse **http://127.0.0.1:8000**.
 
 Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run build` (ou `npm.cmd run build` no PowerShell).
+
+## Integração contínua (CI)
+
+O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.2 e 8.4**, com Node.js 22.
+
+Os testes incluem login, recuperação de senha, expiração e uso único de token, bloqueio de tentativas, sessões e autorização por autoria. E-mails são simulados; nenhuma credencial de produção é usada. Os relatórios PHPUnit ficam nos artefatos por sete dias.
+
+CI não publica um site nem envia e-mails reais. Uma execução aprovada é evidência dos cenários testados, não uma garantia absoluta de segurança. O resultado deve ser conferido antes de integrar o Pull Request; proteção obrigatória da branch depende de configuração separada no GitHub.
 
 ## Testes automatizados
 
