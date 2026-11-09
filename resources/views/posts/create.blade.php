@@ -1,29 +1,14 @@
 @extends('layouts.app')
-
+@section('title', 'Nova postagem')
 @section('content')
-    <h2>Nova postagem</h2>
-
-    <form action="{{ route('posts.store') }}" method="POST">
-        @csrf
-
-        <p>
-            <label for="title">Título</label><br>
-            <input type="text" id="title" name="title"
-                   value="{{ old('title') }}" required>
-            @error('title')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-        </p>
-
-        <p>
-            <label for="content">Conteúdo</label><br>
-            <textarea id="content" name="content"
-                      rows="6" required>{{ old('content') }}</textarea>
-            @error('content')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-        </p>
-
-        <button type="submit">Publicar</button>
-    </form>
+<div class="editor-width">
+<a class="back-link" href="{{ route('posts.index') }}">← Todas as postagens</a>
+<div class="page-heading">
+<p class="eyebrow">SUA VOZ, NOVAS PERSPECTIVAS</p>
+<h1>Uma ideia merece<br>ser <em>compartilhada.</em>
+</h1>
+<p>Escreva sua postagem e abra espaço para a conversa.</p>
+</div>
+<form class="form-card" action="{{ route('posts.store') }}" method="POST">@csrf @include('posts._form')</form>
+</div>
 @endsection

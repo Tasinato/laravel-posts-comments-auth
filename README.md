@@ -5,7 +5,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Documenta%C3%A7%C3%A3o%20final-64748B?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Interface%20renovada-64748B?style=flat-square)
 
 [Visão geral](#visão-geral) · [Funcionalidades](#funcionalidades) · [Regras de acesso](#regras-de-acesso) · [Instalação](#instalação) · [Testes](#testes-automatizados) · [Roadmap](#roadmap-de-desenvolvimento)
 
@@ -14,6 +14,31 @@
 Aplicação web em **Laravel 12** para gerenciamento de postagens e comentários. Qualquer pessoa pode ler conteúdo, usuários autenticados podem publicar, e **somente o autor** pode editar ou excluir cada postagem ou comentário.
 
 A solução prioriza simplicidade, legibilidade, segurança e testes automatizados, sem adicionar dependências desnecessárias.
+
+## Interface
+
+Apresentação editorial com fundo claro, verde escuro, títulos em fonte serifada e cartões para as postagens. Página inicial, listagem, leitura, comentários, painel, login e cadastro compartilham a mesma identidade visual.
+
+![Página inicial do Posts & Comments](docs/images/inicio-desktop.jpg)
+
+![Listagem de postagens](docs/images/postagens-desktop.jpg)
+
+As capturas usam nomes e conteúdo fictícios criados apenas no banco local de demonstração. Esses registros e suas credenciais não fazem parte do repositório.
+
+### Melhorias implementadas
+
+- Layout que reorganiza navegação, cartões e formulários em telas estreitas.
+- Hierarquia de títulos, identificação de autoria e datas de publicação.
+- Formulário compartilhado para criar e editar postagens.
+- Estados vazios, avisos de sucesso e erros associados aos campos.
+- Link para pular ao conteúdo, foco visível e respeito à preferência por movimento reduzido.
+- Ilustração decorativa criada com CSS, sem depender de imagens ou fontes externas.
+
+### Verificações desta revisão
+
+Compilação Vite concluída e **21 testes aprovados, com 58 asserções**. Conferência manual no Chrome de início, listagem, leitura, login/cadastro, painel, publicação, edição e comentários. As telas verificadas em 390 e 320 pixels não apresentaram rolagem horizontal; o link de salto recebeu foco visível pelo teclado.
+
+A revisão não é uma certificação de acessibilidade: auditorias com leitor de tela, contraste em todos os estados, zoom de 400%, Lighthouse/axe e revisão completa dos alvos interativos continuam pendentes. A confirmação de exclusão permanece com o diálogo nativo do navegador.
 
 ## Funcionalidades
 
@@ -235,20 +260,20 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 **Objetivo:** aprimorar a experiência do usuário, garantindo uma interface intuitiva, responsiva e acessível, sem alterar as regras de negócio e autorização existentes.
 
 #### 9.1. Layout e navegação
-- [ ] Revisar o layout principal (`layouts/app.blade.php`).
-- [ ] Padronizar cores, tipografia, espaçamentos, botões e menus.
-- [ ] Organizar o cabeçalho e a navegação entre páginas.
-- [ ] Implementar layout responsivo para desktop, tablet e celular.
-- [ ] Criar link para pular diretamente ao conteúdo principal.
+- [x] Revisar o layout principal (`layouts/app.blade.php`).
+- [x] Padronizar cores, tipografia, espaçamentos, botões e menus.
+- [x] Organizar o cabeçalho e a navegação entre páginas.
+- [x] Implementar layout responsivo para desktop, tablet e celular.
+- [x] Criar link para pular diretamente ao conteúdo principal.
 
 #### 9.2. Postagens e comentários
-- [ ] Melhorar a listagem de postagens (`posts/index.blade.php`).
-- [ ] Melhorar a página de leitura e comentários (`posts/show.blade.php`).
-- [ ] Exibir claramente título, conteúdo, autor e data de publicação.
-- [ ] Padronizar os formulários de criação e edição.
-- [ ] Adicionar mensagens claras de sucesso, erro e validação.
+- [x] Melhorar a listagem de postagens (`posts/index.blade.php`).
+- [x] Melhorar a página de leitura e comentários (`posts/show.blade.php`).
+- [x] Exibir claramente título, conteúdo, autor e data de publicação.
+- [x] Padronizar os formulários de criação e edição.
+- [x] Adicionar mensagens claras de sucesso, erro e validação.
 - [ ] Implementar confirmação acessível antes da exclusão.
-- [ ] Exibir mensagens apropriadas quando não existirem postagens ou comentários.
+- [x] Exibir mensagens apropriadas quando não existirem postagens ou comentários.
 
 #### 9.3. Acessibilidade visual
 - [ ] Garantir contraste adequado entre texto e fundo.
@@ -258,12 +283,12 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 - [ ] Não utilizar exclusivamente cores para transmitir informações.
 
 #### 9.4. Acessibilidade para leitores de tela
-- [ ] Utilizar HTML semântico (`header`, `nav`, `main`, `article`, `footer`).
-- [ ] Configurar corretamente o idioma da página (`lang="pt-BR"`).
-- [ ] Manter hierarquia lógica de títulos (`h1`, `h2`, `h3`).
-- [ ] Associar rótulos descritivos a todos os campos dos formulários.
-- [ ] Garantir nomes acessíveis para botões e links.
-- [ ] Disponibilizar mensagens de erro e sucesso para leitores de tela.
+- [x] Utilizar HTML semântico (`header`, `nav`, `main`, `article`, `footer`).
+- [x] Configurar corretamente o idioma da página (`lang="pt-BR"`).
+- [x] Manter hierarquia lógica de títulos (`h1`, `h2`, `h3`).
+- [x] Associar rótulos descritivos a todos os campos dos formulários.
+- [x] Garantir nomes acessíveis para botões e links.
+- [x] Disponibilizar mensagens de erro e sucesso para leitores de tela.
 - [ ] Testar navegação com NVDA ou tecnologia assistiva equivalente.
 
 #### 9.5. Acessibilidade auditiva
@@ -274,20 +299,20 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 #### 9.6. Navegação por teclado e acessibilidade motora
 - [ ] Garantir utilização das funcionalidades sem mouse.
 - [ ] Implementar ordem lógica de navegação com a tecla Tab.
-- [ ] Destacar visualmente o elemento em foco.
+- [x] Destacar visualmente o elemento em foco.
 - [ ] Garantir acionamento de botões por teclado.
 - [ ] Evitar componentes que dependam exclusivamente de gestos ou movimentos precisos.
 - [ ] Verificar dimensões e espaçamento dos alvos interativos.
 
 #### 9.7. Testes e validação
-- [ ] Verificar responsividade em diferentes resoluções.
+- [x] Verificar responsividade em diferentes resoluções.
 - [ ] Realizar testes manuais de navegação por teclado.
 - [ ] Avaliar acessibilidade com Lighthouse e axe DevTools.
 - [ ] Verificar compatibilidade com leitores de tela.
 - [ ] Revisar os critérios aplicáveis da WCAG 2.2 A e AA.
-- [ ] Executar novamente os 21 testes automatizados do Laravel.
-- [ ] Confirmar que as regras de autenticação e autorização continuam funcionando.
-- [ ] Atualizar o README com as melhorias implementadas e os resultados das verificações.
+- [x] Executar novamente os 21 testes automatizados do Laravel.
+- [x] Confirmar que as regras de autenticação e autorização continuam funcionando.
+- [x] Atualizar o README com as melhorias implementadas e os resultados das verificações.
 
 
 ## Decisões técnicas
