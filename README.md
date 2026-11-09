@@ -38,7 +38,7 @@ As capturas usam nomes e conteúdo fictícios criados apenas no banco local de d
 
 ### Verificações desta revisão
 
-Compilação Vite concluída e **21 testes aprovados, com 58 asserções**. Conferência manual no Chrome de início, listagem, leitura, login/cadastro, painel, publicação, edição e comentários. As telas verificadas em 390 e 320 pixels não apresentaram rolagem horizontal; o link de salto recebeu foco visível pelo teclado.
+Compilação Vite concluída e **39 testes aprovados, com 171 asserções**. Conferência manual no Chrome de início, listagem, leitura, login/cadastro, painel, publicação, edição e comentários. As telas verificadas em 390 e 320 pixels não apresentaram rolagem horizontal; o link de salto recebeu foco visível pelo teclado.
 
 A revisão não é uma certificação de acessibilidade: auditorias com leitor de tela, contraste em todos os estados, zoom de 400%, Lighthouse/axe e revisão completa dos alvos interativos continuam pendentes. A confirmação de exclusão permanece com o diálogo nativo do navegador.
 
@@ -144,7 +144,7 @@ PHP 8.5.12+, Composer, Node.js 26 LTS/npm, Git e extensões PHP exigidas pelo La
 git clone https://github.com/Tasinato/laravel-posts-comments-auth.git
 cd laravel-posts-comments-auth
 composer install
-npm install
+npm ci
 ```
 
 Configure o ambiente:
@@ -225,7 +225,7 @@ php artisan test --filter=GuestAuthorizationTest
 
 Os testes cobrem leitura pública, criação autenticada, validação de campos obrigatórios, bloqueio de visitantes e edição/exclusão restritas ao autor. Os testes com dados usam `RefreshDatabase` e o ambiente de teste configurado no `phpunit.xml`.
 
-**Resultado da suíte completa confirmado em 23/10/2026:** **21 testes aprovados, 58 asserções e nenhuma falha** (`php artisan test`).
+**Resultado da suíte completa confirmado em 09/11/2026:** **39 testes aprovados, 171 asserções e nenhuma falha** (`php artisan test`).
 
 ### Vite nos testes
 
@@ -282,7 +282,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 
 ### 8. Documentação e publicação
 - [x] Revisar o README e registrar decisões técnicas.
-- [x] Confirmar a suíte completa atualizada sem falhas: 21 testes, 58 asserções.
+- [x] Confirmar a suíte completa atualizada sem falhas: 39 testes, 171 asserções.
 - [x] Revisar os arquivos versionados e o `.env.example` e realizar busca básica de padrões de segredos.
 - [x] Publicar código e testes no GitHub (commit `be968c1`) e confirmar a árvore limpa.
 - [X] Publicar esta última revisão do README, incluindo autoria e declaração de uso de IA.
@@ -342,7 +342,7 @@ Isso **não ignora o teste da página**: rota, resposta HTTP e renderização Bl
 - [ ] Avaliar acessibilidade com Lighthouse e axe DevTools.
 - [ ] Verificar compatibilidade com leitores de tela.
 - [ ] Revisar os critérios aplicáveis da WCAG 2.2 A e AA.
-- [x] Executar novamente os 21 testes automatizados do Laravel.
+- [x] Executar novamente os 39 testes automatizados do Laravel.
 - [x] Confirmar que as regras de autenticação e autorização continuam funcionando.
 - [x] Atualizar o README com as melhorias implementadas e os resultados das verificações.
 

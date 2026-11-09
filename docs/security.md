@@ -58,4 +58,4 @@ Substitua domínio, servidor e parâmetros pelos valores do provedor; não coloq
 
 Entrega SMTP real, configuração HTTPS/proxy e operação de produção não foram validadas. Não há MFA, verificação obrigatória de e-mail, monitoramento de abuso distribuído ou auditoria externa de segurança. Essas proteções reduzem riscos; não constituem garantia absoluta de segurança.
 
-Referências: [Laravel Password Broker](https://api.laravel.com/docs/12.x/Illuminate/Auth/Passwords/PasswordBroker.html) e [sessões autenticadas](https://api.laravel.com/docs/12.x/Illuminate/Session/Middleware/AuthenticateSession.html).
+Referências: [Laravel Password Broker](https://laravel.com/framework/docs/13.x/passwords) e [sessões autenticadas](https://laravel.com/framework/docs/13.x/authentication).
