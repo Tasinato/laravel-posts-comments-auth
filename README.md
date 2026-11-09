@@ -128,7 +128,7 @@ Os controllers verificam as permissões, por exemplo, com `Gate::authorize('upda
 
 ## Versões atualizadas
 
-PHP 8.5.12+, Laravel 13.40, PHPUnit 13.4, Vite 8.3, Tailwind CSS 4.3 e Node.js 24. Os arquivos de lock registram as versões exatas instaladas. A CI confere a aplicação nesse novo conjunto de versões.
+PHP 8.5.12+, Laravel 13.40, PHPUnit 13.4, Vite 8.3, Tailwind CSS 4.3 e Node.js 26 LTS. Os arquivos de lock registram as versões exatas instaladas. A CI confere a aplicação nesse novo conjunto de versões.
 
 A atualização do Laravel adota sessões em JSON e restringe a desserialização de objetos no cache. Sessões anteriores podem exigir novo login; contas, postagens e comentários permanecem no banco. Consulte [notas de atualização](docs/upgrade.md).
 
@@ -136,7 +136,7 @@ A atualização do Laravel adota sessões em JSON e restringe a desserializaçã
 
 ### Pré-requisitos
 
-PHP 8.5.12+, Composer, Node.js 24/npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO.
+PHP 8.5.12+, Composer, Node.js 26 LTS/npm, Git e extensões PHP exigidas pelo Laravel, incluindo SQLite/PDO.
 
 ### Clonar e instalar
 
@@ -196,9 +196,9 @@ Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run buil
 
 ## Integração contínua (CI)
 
-O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, verifica alertas de segurança conhecidos com Composer e npm e aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.5**, com Node.js 24.
+O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, verifica alertas de segurança conhecidos com Composer e npm e aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.5**, com Node.js 26 LTS.
 
-O Composer resolve dependências para PHP 8.5.12. Node.js 24 é declarado em package.json e .nvmrc. Esta versão atualizada não oferece suporte a PHP 8.2–8.4.
+O Composer resolve dependências para PHP 8.5.12. Node.js 26 LTS é declarado em package.json e .nvmrc. Esta versão atualizada não oferece suporte a PHP 8.2–8.4.
 
 Os testes incluem login, recuperação de senha, expiração e uso único de token, bloqueio de tentativas, sessões e autorização por autoria. E-mails são simulados; nenhuma credencial de produção é usada. Os relatórios PHPUnit ficam nos artefatos por sete dias.
 
