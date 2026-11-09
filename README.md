@@ -190,7 +190,9 @@ Como alternativa ao servidor Vite, gere os arquivos estáticos com `npm run buil
 
 ## Integração contínua (CI)
 
-O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.2 e 8.4**, com Node.js 22.
+O workflow [Laravel CI](.github/workflows/laravel-ci.yml) executa em cada push, Pull Request ou acionamento manual na aba Actions. Confere o Composer/lock, instala dependências fixadas, verifica alertas de segurança conhecidos com Composer e npm e aplica migrações em banco descartável, compila CSS/JavaScript com Vite, verifica os templates Blade e executa a suíte de testes em **PHP 8.2 e 8.4**, com Node.js 22.
+
+O Composer resolve dependências para PHP 8.2, evitando gerar um lock incompatível ao instalar em versões mais recentes.
 
 Os testes incluem login, recuperação de senha, expiração e uso único de token, bloqueio de tentativas, sessões e autorização por autoria. E-mails são simulados; nenhuma credencial de produção é usada. Os relatórios PHPUnit ficam nos artefatos por sete dias.
 

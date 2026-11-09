@@ -40,6 +40,8 @@ jobs:
         run: composer validate --no-check-publish
       - name: Install locked PHP dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Check PHP dependency advisories
+        run: composer audit
       - name: Prepare disposable environment
         run: |
           cp .env.example .env
@@ -48,6 +50,8 @@ jobs:
           php artisan migrate --force
       - name: Install locked frontend dependencies
         run: npm ci
+      - name: Check frontend dependency advisories
+        run: npm audit --audit-level=high
       - name: Build frontend assets
         run: npm run build
       - name: Compile Blade templates
